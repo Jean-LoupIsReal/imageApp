@@ -6,7 +6,7 @@
  * Cette classe implemente une ImageNoirEtBlanc
  */
 public class ImageNoirEtBlanc  extends Image{
-    private PixelNoiretBlanc matricePixel[][];
+    private PixelNoirBlanc matricePixel[][];
 
     /**
      * Cette méthode est appelée lors de la création d'un nouvel object ImageNoirEtBlanc
@@ -14,7 +14,7 @@ public class ImageNoirEtBlanc  extends Image{
      * @param nomFichier
      * @param format
      */
-    public ImageNoirEtBlanc(String nomFichier, String format, PixelNoiretBlanc[][] matricePixel) {
+    public ImageNoirEtBlanc(String nomFichier, String format, PixelNoirBlanc[][] matricePixel) {
         super(nomFichier, format);
         this.matricePixel = matricePixel;
     }
@@ -22,14 +22,14 @@ public class ImageNoirEtBlanc  extends Image{
     /**
      * @return matricePixel
      */
-    public PixelNoiretBlanc[][] getMatricePixel() {
+    public PixelNoirBlanc[][] getMatricePixel() {
         return matricePixel;
     }
 
     /**
      * @param matricePixel
      */
-    public void setMatricePixel(PixelNoiretBlanc[][] matricePixel) {
+    public void setMatricePixel(PixelNoirBlanc[][] matricePixel) {
         this.matricePixel = matricePixel;
     }
 }
