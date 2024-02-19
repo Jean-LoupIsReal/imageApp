@@ -113,14 +113,28 @@ public class Image {
     public Image extraire(Image i, int p1, int c1, int p2, int c2){ return img;}
     /**
      *
+     * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
+     *
+     * @param i représente l'image d'origine
      */
     public void reduire(Image i){}
     /**
      *
+     * Cette fonction retourne true si les deux images passé en paramettre sont identiques
+     *
+     * @param i1 représente l'image 1
+     * @param i2 représente l'image 2
      */
-    public void sont_identiques(Image i1, Image i2){}
+    public boolean sont_identiques(Image i1, Image i2){
+        return true;
+    }
     /**
      *
+     * Cette fonction fait une rotation de 90 degrés sur l'image reçus en paramettre puis l'enregistre en nouvelle image
+     *
+     * @param i représente l'image d'origine
      */
-    public void pivoter90(Image i){}
+    public void pivoter90(Image i){
+
+    }
 }
