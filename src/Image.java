@@ -9,9 +9,8 @@ public class Image {
      *
      * @param nomFichier
      * @param format
-     * @param matricePixel
      */
-    public Image(String nomFichier, String format, Pixel[][] matricePixel) {
+    public Image(String nomFichier, String format) {
         this.nomFichier = nomFichier;
         this.format = format;
     }
