@@ -94,18 +94,23 @@ public class Image {
      */
     public void ecrire(Files f, Image i){}
     /**
-     * @param image1 doit etre une image que l'on desire lire
-     * @param image2 doit etre un fichier dans lequel l'on va chercher l'information
+     * @param image1 doit etre une image que l'on desire changer
+     * @param image2 doit etre une image que l'on désire dupliquer
      */
     public void copier(Image image1, Image image2){}
     /**
-     *
+     * @return le pixiel qui revient le plus souvent
      */
-    public void couleur_predominante(Image i){ }
+    public Pixel couleur_predominante(Image i){ return i.getMatrixPixel()[0][0]; }
     /**
-     *
+     * @param i Contien l'image de laquel l'on désire extraire une partie
+     * @param p1 x du point 1
+     * @param c1 y du point 1
+     * @param p2 x du point 2
+     * @param c2 y du point 2
+     * @return le pixiel qui revient le plus souvent
      */
-    public void extraire(Image i, int p1, int c1, int p2, int c2){}
+    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return img;}
     /**
      *
      */
