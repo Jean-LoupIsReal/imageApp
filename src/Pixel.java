@@ -10,8 +10,7 @@ public class Pixel {
 
     //Constructeur avec paramètre
     public Pixel(int valeur) {
-        this.valeur = valeur;
-    }
+        this.valeur = valeur;}
 
     //Constructeur sans paramètre
     public Pixel(){
