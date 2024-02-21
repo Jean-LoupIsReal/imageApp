@@ -4,7 +4,7 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
-import java.nio.file.Files;
+import java.io.*;
 
 public class Image {
 
@@ -18,15 +18,12 @@ public class Image {
      *
      * @param nomFichier
      * @param format
-     * @param matricePixel
-     * @param dimX
-     * @param dimY
      */
-    public Image(String nomFichier, String format, Pixel[][] matricePixel, int dimX, int dimY) {
+    public Image(String nomFichier, String format) {
         this.nomFichier = nomFichier;
         this.format = format;
-        this.dimX = dimX;
-        this.dimY = dimY;
+        dimX = 0;
+        dimY = 0;
     }
 
     /**
@@ -83,16 +80,40 @@ public class Image {
         this.dimY = dimY;
     }
     /**
-     * @param i doit etre une image que l'on desire lire
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
      * Permet de lire l'information d'un fichier
      */
-    public void lire(Image i, Files f) {}
+    public void lire(File f) throws IOException {
+
+        //Récupère le fichier et le lit ligne par ligne
+        BufferedReader lecture = new BufferedReader(new FileReader(f));
+        String ligne = null,
+               format;
+        int nbrLignes = 1;
+
+        try {
+            while((ligne = lecture.readLine()) != null){
+                String[] dimension = ligne.split(" ");
+                if(nbrLignes == 1){
+                    format = ligne;
+                } else if (nbrLignes == 2) {
+                    setDimY(Integer.parseInt(dimension[0]));
+                    setDimX(Integer.parseInt(dimension[1]));
+                }
+                nbrLignes++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            lecture.close();
+        }
+    }
+
     /**
      * @param i doit etre une image que l'on desire écrire dans un fichier
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
      */
-    public void ecrire(Files f, Image i){}
+    public void ecrire(File f, Image i){}
     /**
      * @param image1 doit etre une image que l'on desire changer
      * @param image2 doit etre une image que l'on désire dupliquer
@@ -101,7 +122,7 @@ public class Image {
     /**
      * @return le pixiel qui revient le plus souvent
      */
-    public Pixel couleur_predominante(Image i){ return i.getMatrixPixel()[0][0]; }
+    public Pixel couleur_predominante(Image i){ return new Pixel();}
     /**
      * @param i Contien l'image de laquel l'on désire extraire une partie
      * @param p1 x du point 1
@@ -110,7 +131,7 @@ public class Image {
      * @param c2 y du point 2
      * @return le pixiel qui revient le plus souvent
      */
-    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return img;}
+    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return i;}
     /**
      *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
