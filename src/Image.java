@@ -157,8 +157,19 @@ public class Image {
     public boolean sont_identiques(Image i1, Image i2){
         boolean identique = true;
         // regarde si les images ont la meme grandeur
-        identique = identique && (i1.getDimX() == i2.getDimX());
-        identique = identique && (i1.getDimY() == i2.getDimY());
+        identique = identique && i1.getDimX() == i2.getDimX();
+        identique = identique && i1.getDimY() == i2.getDimY();
+        if(identique)
+        {
+            for(int x = 0; x < i1.getDimX(); x++)
+            {
+                for(int y = 0; y < i1.getDimY(); y++)
+                {
+                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
+                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+                }
+            }
+        }
         return identique;
     }
     /**
@@ -171,7 +182,7 @@ public class Image {
         Pixel[][] matriceTemp = new Pixel[i.getDimX()][i.getDimY()];
         for(int x = 0; x < i.getDimX(); x++)
         {
-            for(int y = 0; y < i.getDimX(); y++)
+            for(int y = 0; y < i.getDimY(); y++)
             {
                 matriceTemp[x][y] = i.getMatrixPixel()[y][x];
             }

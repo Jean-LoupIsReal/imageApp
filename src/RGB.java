@@ -8,6 +8,18 @@ public class RGB {
         this.setB(b);
     }
 
+    public int getR() {
+        return R;
+    }
+
+    public int getG() {
+        return G;
+    }
+
+    public int getB() {
+        return B;
+    }
+
     public void setR(int r) {
         if(r < 0 || r > 255)
             // a ajouter Exception
@@ -26,6 +38,13 @@ public class RGB {
             // a ajouter Exception
             System.out.print("B de rgb a recu une valeur invalide");
         B = b;
+    }
+    public boolean compare(RGB rgb){
+        boolean identique = true;
+        identique = identique && this.getR() == rgb.getR();
+        identique = identique && this.getG() == rgb.getG();
+        identique = identique && this.getB() == rgb.getB();
+        return identique;
     }
 
 

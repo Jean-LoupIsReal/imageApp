@@ -14,9 +14,8 @@ public class PixelCouleur extends PixelNoirBlanc{
      * @version 1.0
      * @param couleur
      */
-    public PixelCouleur(int luminosite, RGB couleur){
+    public PixelCouleur(RGB couleur){
         setCouleur(couleur);
-        this.setLuminosite(luminosite);
     }
     /**
      * Cette méthode attribut une valeur au pixel
