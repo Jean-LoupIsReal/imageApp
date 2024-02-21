@@ -42,6 +42,6 @@ public class PixelNoirBlanc implements Pixel {
      * @return value du Pixel
      */
     public RGB getCouleur(){
-        return new RGB(255,255,255);
+        return new RGB(teinte,teinte,teinte);
     }
 }

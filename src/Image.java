@@ -4,6 +4,7 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
+import javax.swing.*;
 import java.nio.file.Files;
 
 public class Image {
@@ -115,18 +116,34 @@ public class Image {
         i1.setMatricePixel(i2.getMatrixPixel());
     }
     /**
-     * @return le pixiel qui revient le plus souvent
-     */
-    public Pixel couleur_predominante(Image i){ return i.getMatrixPixel()[0][0]; }
-    /**
      * @param i Contien l'image de laquel l'on désire extraire une partie
-     * @param p1 x du point 1
-     * @param c1 y du point 1
-     * @param p2 x du point 2
-     * @param c2 y du point 2
+     * @param p1 y du point 1
+     * @param c1 x du point 1
+     * @param p2 y du point 2
+     * @param c2 x du point 2
      * @return le pixiel qui revient le plus souvent
      */
-    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return i;}
+    public Image extraire(Image i, int p1, int c1, int p2, int c2){
+        //Déclare les nouvelle dimmentions de l'image
+        int nouvDimX = c2-c1;
+        int nouvDimY = p2-p1;
+        //Vérifie que les chiffres entrés soient bons
+        if(nouvDimY < 0 || nouvDimX < 0)
+            //Erreur
+            System.out.print("nouvDim négatif dans extraire");
+        Pixel[][] matriceTemp= new Pixel[nouvDimY][nouvDimX];
+        //Entre les valeurs des pixels dans la matrice temporaire
+        for(int y = 0; y < nouvDimY; y++)
+        {
+            for(int x = 0; x < nouvDimX; x++)
+            {
+                matriceTemp[y][x] = i.getMatrixPixel()[p1 + y][c1 + x];
+            }
+        }
+        //Entre les nouvelles informations dans un nouvel objet
+        Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
+        return imageTemp;
+    }
     /**
      *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
@@ -171,6 +188,12 @@ public class Image {
             }
         }
         return identique;
+    }
+    /**
+     * @return le pixiel qui revient le plus souvent
+     */
+    public Pixel couleur_predominante(Image i){
+        return i.getMatrixPixel()[0][0];
     }
     /**
      *

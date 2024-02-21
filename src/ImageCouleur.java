@@ -33,4 +33,6 @@ public class ImageCouleur extends Image{
     public void setMatricePixel(PixelCouleur[][] matricePixel) {
         this.matricePixel = matricePixel;
     }
+
+
 }
