@@ -117,16 +117,16 @@ public class Image {
     /**
      * @return le pixiel qui revient le plus souvent
      */
-    public Pixel couleur_predominante(Image image){ return image.getMatrixPixel()[0][0]; }
+    public Pixel couleur_predominante(Image i){ return i.getMatrixPixel()[0][0]; }
     /**
-     * @param image Contien l'image de laquel l'on désire extraire une partie
+     * @param i Contien l'image de laquel l'on désire extraire une partie
      * @param p1 x du point 1
      * @param c1 y du point 1
      * @param p2 x du point 2
      * @param c2 y du point 2
      * @return le pixiel qui revient le plus souvent
      */
-    public Image extraire(Image image, int p1, int c1, int p2, int c2){ return image;}
+    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return i;}
     /**
      *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
