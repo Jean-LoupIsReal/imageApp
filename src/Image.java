@@ -6,6 +6,8 @@
  */
 import javax.swing.*;
 import java.nio.file.Files;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Image {
 
@@ -14,6 +16,7 @@ public class Image {
     private Pixel matricePixel[][];
     private int dimX;
     private int dimY;
+
     /**
      * Cette méthode est appelée lors de la création d'un nouvel object Image
      *
@@ -30,6 +33,19 @@ public class Image {
         this.matricePixel = matricePixel;
     }
 
+    /**
+     * Cette méthode est appelée lors de la création d'un nouvel object Image
+     *
+     * @param nomFichier
+     * @param format
+     *
+     */
+    public Image(String nomFichier, String format) {
+        this.nomFichier = nomFichier;
+        this.format = format;
+        this.dimX = 0;
+        this.dimY = 0;
+    }
     /**
      * @return nomFichier
      */
@@ -92,18 +108,16 @@ public class Image {
         this.dimY = dimY;
     }
     /**
-     * @param i doit etre une image que l'on desire lire
+     *
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
      * Permet de lire l'information d'un fichier
      */
-    public void lire(Image i, Files f) {
-
-    }
+    public void lire(Image i, Files f) {}
     /**
      * @param i doit etre une image que l'on desire écrire dans un fichier
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
      */
-    public void ecrire(Files f, Image i){}
+    public void ecrire(File f, Image i) throws FileNotFoundException {}
     /**
      * @param i1 doit etre une image que l'on desire changer
      * @param i2 doit etre une image que l'on désire dupliquer
