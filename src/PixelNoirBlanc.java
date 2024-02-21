@@ -25,6 +25,9 @@ public class PixelNoirBlanc implements Pixel {
      * @param luminosite
      */
     public void setLuminosite(int luminosite) {
+        if(luminosite < 0 || luminosite > 255)
+            // a ajouter Exception
+            System.out.print("luminosite de PixelNoirBlanc a recu une valeur invalide");
         this.luminosite = luminosite;
     }
     /**
