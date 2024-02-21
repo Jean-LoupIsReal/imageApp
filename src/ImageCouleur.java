@@ -13,11 +13,9 @@ public class ImageCouleur extends Image{
      *
      * @param nomFichier
      * @param format
-     * @param matricePixel
      */
-    public ImageCouleur(String nomFichier, String format, PixelCouleur[][] matricePixel) {
+    public ImageCouleur(String nomFichier, String format) {
         super(nomFichier, format);
-        this.matricePixel = matricePixel;
     }
 
     /**
@@ -32,5 +30,28 @@ public class ImageCouleur extends Image{
      */
     public void setMatricePixel(PixelCouleur[][] matricePixel) {
         this.matricePixel = matricePixel;
+    }
+
+    @Override
+    public void ecrire(File f, Image i) throws FileNotFoundException {
+        try {
+            FileOutputStream fos = new FileOutputStream(f.getName());
+            PrintStream ps = new PrintStream(fos);
+
+            ps.println("P3");       //RGB en ASCII
+            ps.println(i.getDimX() + " " + i.getDimY());  //Dimmensions de l'image
+            ps.println("255");      //valeur max de chaque pixel
+
+            for (int j = 0; j < i.getDimY(); j++) {
+                for (int k = 0; k < i.getDimX(); k++) {
+                    //ps.print(this.matricePixel[j][k].getValeur());  //écriture du pixel correspondant au coo
+                    ps.print("89 56 150");
+                    ps.print(" ");      //Séparation de chaque pixel par un espace
+                }
+                ps.println();       //Retour à la ligne
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }

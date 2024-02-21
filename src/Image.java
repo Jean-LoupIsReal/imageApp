@@ -4,12 +4,16 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
-import java.io.*;
+import javax.swing.*;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Image {
 
     private String nomFichier;
     private  String format;
+    private Pixel matricePixel[][];
     private int dimX;
     private int dimY;
 
@@ -18,18 +22,17 @@ public class Image {
      *
      * @param nomFichier
      * @param format
+     * @param dimX
+     * @param dimY
      */
-    public Image(String nomFichier, String format) {
+    public Image(String nomFichier, String format, Pixel matricePixel[][], int dimX, int dimY) {
         this.nomFichier = nomFichier;
         this.format = format;
-        dimX = 0;
-        dimY = 0;
+        this.dimX = dimX;
+        this.dimY = dimY;
+        this.matricePixel = matricePixel;
     }
-
-    public Image(){
-        this(null,null);
-    }
-
+     
     /**
      * @return nomFichier
      */
@@ -57,6 +60,14 @@ public class Image {
     public void setFormat(String format) {
         this.format = format;
     }
+    /**
+     * @return la dimention en x de l'object
+     */
+    public void setMatricePixel(Pixel matricePixel[][]){this.matricePixel = matricePixel;};
+    /**
+     * @return la dimention en x de l'object
+     */
+    public Pixel[][] getMatrixPixel(){return this.matricePixel;}
     /**
      * @return la dimention en x de l'object
      */
@@ -115,32 +126,70 @@ public class Image {
      * @param i doit etre une image que l'on desire écrire dans un fichier
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
      */
-    public void ecrire(File f, Image i){}
+
+    public void ecrire(File f, Image i) throws FileNotFoundException {}
     /**
-     * @param image1 doit etre une image que l'on desire changer
-     * @param image2 doit etre une image que l'on désire dupliquer
+     * @param i1 doit etre une image que l'on desire changer
+     * @param i2 doit etre une image que l'on désire dupliquer
      */
-    public void copier(Image image1, Image image2){}
-    /**
-     * @return le pixiel qui revient le plus souvent
-     */
-    public Pixel couleur_predominante(Image i){ return new Pixel();}
+    public void copier(Image i1, Image i2){
+        i1.setDimX(i2.getDimX());
+        i1.setDimY(i2.getDimY());
+        i1.setFormat(i2.getFormat());
+        i1.setNomFichier(i2.getNomFichier());
+        i1.setMatricePixel(i2.getMatrixPixel());
+    }
+    
     /**
      * @param i Contien l'image de laquel l'on désire extraire une partie
-     * @param p1 x du point 1
-     * @param c1 y du point 1
-     * @param p2 x du point 2
-     * @param c2 y du point 2
+     * @param p1 y du point 1
+     * @param c1 x du point 1
+     * @param p2 y du point 2
+     * @param c2 x du point 2
      * @return le pixiel qui revient le plus souvent
      */
-    public Image extraire(Image i, int p1, int c1, int p2, int c2){ return i;}
+    public Image extraire(Image i, int p1, int c1, int p2, int c2){
+        //Déclare les nouvelle dimmentions de l'image
+        int nouvDimX = c2-c1;
+        int nouvDimY = p2-p1;
+        //Vérifie que les chiffres entrés soient bons
+        if(nouvDimY < 0 || nouvDimX < 0)
+            //Erreur
+            System.out.print("nouvDim négatif dans extraire");
+        Pixel[][] matriceTemp= new Pixel[nouvDimY][nouvDimX];
+        //Entre les valeurs des pixels dans la matrice temporaire
+        for(int y = 0; y < nouvDimY; y++)
+        {
+            for(int x = 0; x < nouvDimX; x++)
+            {
+                matriceTemp[y][x] = i.getMatrixPixel()[p1 + y][c1 + x];
+            }
+        }
+        //Entre les nouvelles informations dans un nouvel objet
+        Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
+        return imageTemp;
+    }
+
     /**
      *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
      *
      * @param i représente l'image d'origine
      */
-    public void reduire(Image i){}
+    public Image reduire(Image i){
+        int nouvDimX = i.getDimX()/2;
+        int nouvDimY = i.getDimY()/2;
+        Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];
+        for(int x = 0; x < nouvDimX; x++)
+        {
+            for(int y = 0; y < nouvDimY; y++)
+            {
+                matriceTemp[y][x] = i.getMatrixPixel()[y][x];
+            }
+        }
+        Image nouvelleImg = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
+        return nouvelleImg;
+    }
     /**
      *
      * Cette fonction retourne true si les deux images passé en paramettre sont identiques
@@ -149,7 +198,28 @@ public class Image {
      * @param i2 représente l'image 2
      */
     public boolean sont_identiques(Image i1, Image i2){
-        return true;
+        boolean identique = true;
+        // regarde si les images ont la meme grandeur
+        identique = identique && i1.getDimX() == i2.getDimX();
+        identique = identique && i1.getDimY() == i2.getDimY();
+        if(identique)
+        {
+            for(int x = 0; x < i1.getDimX(); x++)
+            {
+                for(int y = 0; y < i1.getDimY(); y++)
+                {
+                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
+                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+                }
+            }
+        }
+        return identique;
+    }
+    /**
+     * @return le pixiel qui revient le plus souvent
+     */
+    public Pixel couleur_predominante(Image i){
+        return i.getMatrixPixel()[0][0];
     }
     /**
      *
@@ -158,6 +228,14 @@ public class Image {
      * @param i représente l'image d'origine
      */
     public void pivoter90(Image i){
-
+        Pixel[][] matriceTemp = new Pixel[i.getDimX()][i.getDimY()];
+        for(int x = 0; x < i.getDimX(); x++)
+        {
+            for(int y = 0; y < i.getDimY(); y++)
+            {
+                matriceTemp[x][y] = i.getMatrixPixel()[y][x];
+            }
+        }
+        i.setMatricePixel(matriceTemp);
     }
 }
