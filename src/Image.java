@@ -99,19 +99,20 @@ public class Image {
 
     }
     /**
-     * @param image doit etre une image que l'on desire écrire dans un fichier
+     * @param i doit etre une image que l'on desire écrire dans un fichier
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
      */
-    public void ecrire(Files f, Image image){}
+    public void ecrire(Files f, Image i){}
     /**
-     * @param image1 doit etre une image que l'on desire changer
-     * @param image2 doit etre une image que l'on désire dupliquer
+     * @param i1 doit etre une image que l'on desire changer
+     * @param i2 doit etre une image que l'on désire dupliquer
      */
-    public void copier(Image image1, Image image2){
-        image1.setDimX(image2.getDimX());
-        image1.setDimY(image2.getDimY());
-        image1.setFormat(image2.getFormat());
-        image1.setNomFichier(image2.getNomFichier());
+    public void copier(Image i1, Image i2){
+        i1.setDimX(i2.getDimX());
+        i1.setDimY(i2.getDimY());
+        i1.setFormat(i2.getFormat());
+        i1.setNomFichier(i2.getNomFichier());
+        i1.setMatricePixel(i2.getMatrixPixel());
     }
     /**
      * @return le pixiel qui revient le plus souvent
@@ -130,37 +131,51 @@ public class Image {
      *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
      *
-     * @param image représente l'image d'origine
+     * @param i représente l'image d'origine
      */
-    public Image reduire(Image image){
-        int nouvDimX = image.getDimX()/2;
-        int nouvDimY = image.getDimY()/2;
-        Image nouvelleImg = new Image(image.getNomFichier(), image.getFormat(), image.getMatrixPixel(), nouvDimX, nouvDimY);
+    public Image reduire(Image i){
+        int nouvDimX = i.getDimX()/2;
+        int nouvDimY = i.getDimY()/2;
+        Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];
+        for(int x = 0; x < nouvDimX; x++)
+        {
+            for(int y = 0; y < nouvDimY; y++)
+            {
+                matriceTemp[y][x] = i.getMatrixPixel()[y][x];
+            }
+        }
+        Image nouvelleImg = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return nouvelleImg;
     }
     /**
      *
      * Cette fonction retourne true si les deux images passé en paramettre sont identiques
      *
-     * @param image1 représente l'image 1
-     * @param image2 représente l'image 2
+     * @param i1 représente l'image 1
+     * @param i2 représente l'image 2
      */
-    public boolean sont_identiques(Image image1, Image image2){
+    public boolean sont_identiques(Image i1, Image i2){
         boolean identique = true;
-        //regarde si la
-        identique = identique;
+        // regarde si les images ont la meme grandeur
+        identique = identique && (i1.getDimX() == i2.getDimX());
+        identique = identique && (i1.getDimY() == i2.getDimY());
         return identique;
     }
     /**
      *
      * Cette fonction fait une rotation de 90 degrés sur l'image reçus en paramettre puis l'enregistre en nouvelle image
      *
-     * @param image représente l'image d'origine
+     * @param i représente l'image d'origine
      */
-    public void pivoter90(Image image){
-        Pixel matriceTemp[][] = new Pixel[image.getDimY()][image.getDimX()];
-        for(int  = 0; i < )
-
-
+    public void pivoter90(Image i){
+        Pixel[][] matriceTemp = new Pixel[i.getDimX()][i.getDimY()];
+        for(int x = 0; x < i.getDimX(); x++)
+        {
+            for(int y = 0; y < i.getDimX(); y++)
+            {
+                matriceTemp[x][y] = i.getMatrixPixel()[y][x];
+            }
+        }
+        i.setMatricePixel(matriceTemp);
     }
 }
