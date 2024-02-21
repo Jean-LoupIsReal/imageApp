@@ -26,6 +26,10 @@ public class Image {
         dimY = 0;
     }
 
+    public Image(){
+        this(null,null);
+    }
+
     /**
      * @return nomFichier
      */
@@ -84,19 +88,17 @@ public class Image {
      * Permet de lire l'information d'un fichier
      */
     public void lire(File f) throws IOException {
-
         //Récupère le fichier et le lit ligne par ligne
         BufferedReader lecture = new BufferedReader(new FileReader(f));
-        String ligne = null,
-               format;
+        String ligne = null;
         int nbrLignes = 1;
 
         try {
-            while((ligne = lecture.readLine()) != null){
+            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les ligne
                 String[] dimension = ligne.split(" ");
-                if(nbrLignes == 1){
-                    format = ligne;
-                } else if (nbrLignes == 2) {
+                if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
+                    setFormat(ligne);
+                } else if (nbrLignes == 2) {            //Prend les dimensions des 2ème ligne et l'affecte à dimY et DimX
                     setDimY(Integer.parseInt(dimension[0]));
                     setDimX(Integer.parseInt(dimension[1]));
                 }
