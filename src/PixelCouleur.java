@@ -8,6 +8,7 @@
 public class PixelCouleur extends PixelNoirBlanc{
     private RGB couleur;
 
+
     /**
      *Cette méthode est appelée lors de la création d'un nouvel object Image
      * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
