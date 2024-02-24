@@ -5,9 +5,8 @@
  * @author Jean-Loup Dandurand-Pominville
  */
 import javax.swing.*;
+import java.io.*;
 import java.nio.file.Files;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class Image {
 
@@ -32,7 +31,12 @@ public class Image {
         this.dimY = dimY;
         this.matricePixel = matricePixel;
     }
-     
+
+    public Image(String nomFichier, String format) {
+        this.nomFichier = nomFichier;
+        this.format = format;
+    }
+
     /**
      * @return nomFichier
      */
