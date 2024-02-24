@@ -4,14 +4,12 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
-import javax.swing.*;
 import java.io.*;
-import java.nio.file.Files;
 
 public class Image {
 
     private String nomFichier;
-    private  String format;
+    private String format;
     private Pixel matricePixel[][];
     private int dimX;
     private int dimY;
@@ -64,14 +62,23 @@ public class Image {
     public void setFormat(String format) {
         this.format = format;
     }
+
     /**
      * @return la dimention en x de l'object
      */
-    public void setMatricePixel(Pixel matricePixel[][]){this.matricePixel = matricePixel;};
+    public void setMatricePixel(Pixel matricePixel[][]) {
+        this.matricePixel = matricePixel;
+    }
+
+    ;
+
     /**
-     * @return la dimention en x de l'object
+     * @return la matrice de pixel de l'image en question
      */
-    public Pixel[][] getMatrixPixel(){return this.matricePixel;}
+    public Pixel[][] getMatricePixel() {
+        return this.matricePixel;
+    }
+
     /**
      * @return la dimention en x de l'object
      */
@@ -85,6 +92,7 @@ public class Image {
     public void setDimX(int dimX) {
         this.dimX = dimX;
     }
+
     /**
      * @return la dimention en y de l'object
      */
@@ -98,9 +106,10 @@ public class Image {
     public void setDimY(int dimY) {
         this.dimY = dimY;
     }
+
     /**
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
-     * Permet de lire l'information d'un fichier
+     *          Permet de lire l'information d'un fichier
      */
     public void lire(File f) throws IOException {
         //Récupère le fichier et le lit ligne par ligne
@@ -109,9 +118,9 @@ public class Image {
         int nbrLignes = 1;
 
         try {
-            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les ligne
+            while ((ligne = lecture.readLine()) != null) {  //Boucle while qui lit toutes les ligne
                 String[] dimension = ligne.split(" ");
-                if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
+                if (nbrLignes == 1) {                      //Prends les informations de la première ligne et l'affecte au format
                     setFormat(ligne);
                 } else if (nbrLignes == 2) {            //Prend les dimensions des 2ème ligne et l'affecte à dimY et DimX
                     setDimY(Integer.parseInt(dimension[0]));
@@ -119,9 +128,9 @@ public class Image {
                 }
                 nbrLignes++;
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             lecture.close();
         }
     }
@@ -131,113 +140,106 @@ public class Image {
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
      */
 
-    public void ecrire(File f, Image i) throws FileNotFoundException {}
+    public void ecrire(File f, Image i) throws FileNotFoundException {
+    }
+
     /**
      * @param i1 doit etre une image que l'on desire changer
      * @param i2 doit etre une image que l'on désire dupliquer
      */
-    public void copier(Image i1, Image i2){
+    public void copier(Image i1, Image i2) {
         i1.setDimX(i2.getDimX());
         i1.setDimY(i2.getDimY());
         i1.setFormat(i2.getFormat());
         i1.setNomFichier(i2.getNomFichier());
-        i1.setMatricePixel(i2.getMatrixPixel());
+        i1.setMatricePixel(i2.getMatricePixel());
     }
-    
+
     /**
-     * @param i Contien l'image de laquel l'on désire extraire une partie
+     * @param i  Contien l'image de laquel l'on désire extraire une partie
      * @param p1 y du point 1
      * @param c1 x du point 1
      * @param p2 y du point 2
      * @param c2 x du point 2
      * @return le pixiel qui revient le plus souvent
      */
-    public Image extraire(Image i, int p1, int c1, int p2, int c2){
+    public Image extraire(Image i, int p1, int c1, int p2, int c2) {
         //Déclare les nouvelle dimmentions de l'image
-        int nouvDimX = c2-c1;
-        int nouvDimY = p2-p1;
+        int nouvDimX = c2 - c1;
+        int nouvDimY = p2 - p1;
         //Vérifie que les chiffres entrés soient bons
-        if(nouvDimY < 0 || nouvDimX < 0)
+        if (nouvDimY < 0 || nouvDimX < 0)
             //Erreur
             System.out.print("nouvDim négatif dans extraire");
-        Pixel[][] matriceTemp= new Pixel[nouvDimY][nouvDimX];
+        Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];
         //Entre les valeurs des pixels dans la matrice temporaire
-        for(int y = 0; y < nouvDimY; y++)
-        {
-            for(int x = 0; x < nouvDimX; x++)
-            {
-                matriceTemp[y][x] = i.getMatrixPixel()[p1 + y][c1 + x];
+        for (int y = 0; y < nouvDimY; y++) {
+            for (int x = 0; x < nouvDimX; x++) {
+                matriceTemp[y][x] = i.getMatricePixel()[p1 + y][c1 + x];
             }
         }
         //Entre les nouvelles informations dans un nouvel objet
-        Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
+        Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return imageTemp;
     }
 
     /**
-     *
      * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
      *
      * @param i représente l'image d'origine
      */
-    public Image reduire(Image i){
-        int nouvDimX = i.getDimX()/2;
-        int nouvDimY = i.getDimY()/2;
+    public Image reduire(Image i) {
+        int nouvDimX = i.getDimX() / 2;
+        int nouvDimY = i.getDimY() / 2;
         Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];
-        for(int x = 0; x < nouvDimX; x++)
-        {
-            for(int y = 0; y < nouvDimY; y++)
-            {
-                matriceTemp[y][x] = i.getMatrixPixel()[y][x];
+        for (int x = 0; x < nouvDimX; x++) {
+            for (int y = 0; y < nouvDimY; y++) {
+                matriceTemp[y][x] = i.getMatricePixel()[y][x];
             }
         }
         Image nouvelleImg = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return nouvelleImg;
     }
+
     /**
-     *
      * Cette fonction retourne true si les deux images passé en paramettre sont identiques
      *
      * @param i1 représente l'image 1
      * @param i2 représente l'image 2
      */
-    public boolean sont_identiques(Image i1, Image i2){
+    public boolean sont_identiques(Image i1, Image i2) {
         boolean identique = true;
         // regarde si les images ont la meme grandeur
         identique = identique && i1.getDimX() == i2.getDimX();
         identique = identique && i1.getDimY() == i2.getDimY();
-        if(identique)
-        {
-            for(int x = 0; x < i1.getDimX(); x++)
-            {
-                for(int y = 0; y < i1.getDimY(); y++)
-                {
-                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
-                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+        if (identique) {
+            for (int x = 0; x < i1.getDimX(); x++) {
+                for (int y = 0; y < i1.getDimY(); y++) {
+                    identique = identique && i1.getMatricePixel()[y][x].getTeinte() == i2.getMatricePixel()[y][x].getTeinte();
+                    identique = identique && i1.getMatricePixel()[y][x].getCouleur().compare(i2.getMatricePixel()[y][x].getCouleur());
                 }
             }
         }
         return identique;
     }
+
     /**
      * @return le pixiel qui revient le plus souvent
      */
-    public Pixel couleur_predominante(Image i){
-        return i.getMatrixPixel()[0][0];
+    public Pixel couleur_predominante(Image i) {
+        return i.getMatricePixel()[0][0];
     }
+
     /**
-     *
      * Cette fonction fait une rotation de 90 degrés sur l'image reçus en paramettre puis l'enregistre en nouvelle image
      *
      * @param i représente l'image d'origine
      */
-    public void pivoter90(Image i){
+    public void pivoter90(Image i) {
         Pixel[][] matriceTemp = new Pixel[i.getDimX()][i.getDimY()];
-        for(int x = 0; x < i.getDimX(); x++)
-        {
-            for(int y = 0; y < i.getDimY(); y++)
-            {
-                matriceTemp[x][y] = i.getMatrixPixel()[y][x];
+        for (int x = 0; x < i.getDimX(); x++) {
+            for (int y = 0; y < i.getDimY(); y++) {
+                matriceTemp[x][y] = i.getMatricePixel()[y][x];
             }
         }
         i.setMatricePixel(matriceTemp);
