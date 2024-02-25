@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae180a49-4b96-48bd-8335-9cc67eaeb2ca" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pixel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PixelCouleur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PixelCouleur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PixelNoirBlanc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PixelNoirBlanc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RGB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RGB.java" afterDir="false" />

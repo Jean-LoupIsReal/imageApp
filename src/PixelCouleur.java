@@ -45,6 +45,7 @@ public class PixelCouleur extends PixelNoirBlanc{
     public RGB getCouleur(){
         return this.couleur;
     }
-
-
+    /**public void ecrire(out){
+        couleur.ecrir(out)
+     }*/
 }

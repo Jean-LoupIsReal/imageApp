@@ -65,5 +65,10 @@ public class RGB {
         return identique;
     }
 
+    public void ecrire(out)
+    {
+        out(this.R + " " + this.G + " " + this.B + " ")
+    }
+
 
 }
