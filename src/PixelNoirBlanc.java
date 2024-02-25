@@ -12,10 +12,10 @@ public class PixelNoirBlanc implements Pixel {
      *Cette méthode est appelée lors de la création d'un nouvel object Image
      * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
      * @version 1.0
-     * @param luminosite
+     * @param teinte
      */
-    public PixelNoirBlanc(int luminosite){
-        setTeinte(luminosite);
+    public PixelNoirBlanc(int teinte){
+        setTeinte(teinte);
     }
     public PixelNoirBlanc(){
         setTeinte(255);
@@ -27,7 +27,7 @@ public class PixelNoirBlanc implements Pixel {
     public void setTeinte(int teinte) {
         if(teinte < 0 || teinte > 255)
             // a ajouter Exception
-            System.out.print("luminosite de PixelNoirBlanc a recu une valeur invalide");
+            System.out.print("Teinte de PixelNoirBlanc a recu une valeur invalide");
         this.teinte = teinte;
     }
     /**
@@ -44,4 +44,6 @@ public class PixelNoirBlanc implements Pixel {
     public RGB getCouleur(){
         return new RGB(teinte,teinte,teinte);
     }
+
+    //public String toString(){return Integer.toString(teinte);}
 }

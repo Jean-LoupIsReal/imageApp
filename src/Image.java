@@ -4,10 +4,8 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
-import javax.swing.*;
-import java.nio.file.Files;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.Objects;
 
 public class Image {
 
@@ -32,7 +30,16 @@ public class Image {
         this.dimY = dimY;
         this.matricePixel = matricePixel;
     }
-     
+
+    public Image(String nomFichier, String format) {
+        this.nomFichier = nomFichier;
+        this.format = format;
+    }
+
+    public Image(){
+        this(null, null, null, 0,0);
+    }
+
     /**
      * @return nomFichier
      */
@@ -105,20 +112,39 @@ public class Image {
         int nbrLignes = 1;
 
         try {
-            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les ligne
+            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les lignes
                 String[] dimension = ligne.split(" ");
                 if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
                     setFormat(ligne);
-                } else if (nbrLignes == 2) {            //Prend les dimensions des 2ème ligne et l'affecte à dimY et DimX
+                } else if (nbrLignes == 2) {            //Prend les dimensions de la 2ᵉ ligne et l'affecte à dimY et DimX
                     setDimY(Integer.parseInt(dimension[0]));
                     setDimX(Integer.parseInt(dimension[1]));
                 }
                 nbrLignes++;
+                //System.out.println(ligne);
             }
+            //creationMatrice();
+
         } catch (IOException e){
             e.printStackTrace();
         }finally {
             lecture.close();
+        }
+    }
+
+    public void creationMatrice(){
+        matricePixel = new Pixel[dimY][dimX];
+
+        if(Objects.equals(getFormat(), "P2")){
+            for(int i = 0; i < getDimY(); i++){
+                for(int j = 0; j < getDimX(); j++){
+                   matricePixel[i][j] = new PixelNoirBlanc();
+                    System.out.print(matricePixel[i][j] + " ");
+                }
+                System.out.println();
+            }
+        } else {
+            System.out.println("HERE");
         }
     }
 
@@ -139,7 +165,7 @@ public class Image {
         i1.setNomFichier(i2.getNomFichier());
         i1.setMatricePixel(i2.getMatrixPixel());
     }
-    
+
     /**
      * @param i Contien l'image de laquel l'on désire extraire une partie
      * @param p1 y du point 1
