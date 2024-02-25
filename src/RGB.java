@@ -9,33 +9,51 @@ public class RGB {
     }
 
     public int getR() {
+
+        if(R > 255)
+            return 255
         return R;
     }
 
     public int getG() {
-        return G;
+
+        if(G > 255)
+            return 255
+    return G;
     }
 
     public int getB() {
+        if(B > 255)
+            return 255
         return B;
     }
-
+    /**
+     * Cette méthode attribut une valeur a la calsse
+     * @param r est la couleur en rouge
+     */
     public void setR(int r) {
-        if(r < 0 || r > 255)
-            // a ajouter Exception
-            System.out.print("R de rgb a recu une valeur invalide");
+        else if (r < 0)
+            //ajouter Exception
+            System.out.print("G de rgb a recu une valeur invalide");
         R = r;
     }
+    /**
+     * Cette méthode attribut une valeur a la calsse
+     * @param g est la couleur en vert
+     */
     public void setG(int g) {
-        if(g < 0 || g > 255)
-            // a ajouter Exception
+        else if (g < 0)
+            // ajouter Exception
             System.out.print("G de rgb a recu une valeur invalide");
         G = g;
     }
-
+    /**
+     * Cette méthode attribut une valeur a la calsse
+     * @param b est la couleur en bleu
+     */
     public void setB(int b) {
-        if(b < 0 || b > 255)
-            // a ajouter Exception
+        else if (b < 0)
+            // ajouter Exception
             System.out.print("B de rgb a recu une valeur invalide");
         B = b;
     }

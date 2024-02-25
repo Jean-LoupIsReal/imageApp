@@ -250,4 +250,21 @@ public RGB couleur_predominante(Image i){
         }
         i.setMatricePixel(matriceTemp);
     }
+    /**
+     *
+     * Cette fonction éclairci/noirci l'image au complet
+     *
+     * @param pourcentage est la valeur selon laquel on veut éclaircir/noircir l'image, 100 = valeur initiale
+     */
+    public void eclaircirNoircir(int pourcentage){
+        for(int x = 0; x < i.getDimX(); x++)
+        {
+            for(int y = 0; y < i.getDimY(); y++)
+            {
+                matriceTemp[y][x].setTeinte(matriceTemp[y][x].getTeinte() * pourcentage/100);
+            }
+        }
+    }
+
 }
+

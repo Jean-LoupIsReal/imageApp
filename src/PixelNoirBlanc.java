@@ -25,7 +25,9 @@ public class PixelNoirBlanc implements Pixel {
      * @param teinte
      */
     public void setTeinte(int teinte) {
-        if(teinte < 0 || teinte > 255)
+        if(teinte > 255)
+            this.teinte = 255;
+        if(teinte < 0)
             // a ajouter Exception
             System.out.print("luminosite de PixelNoirBlanc a recu une valeur invalide");
         this.teinte = teinte;
