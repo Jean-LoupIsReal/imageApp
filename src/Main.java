@@ -7,7 +7,6 @@ public class Main {
         Image test = new Image();
         File imgFile = new File(fileName + "." + format);
 
-
         test.lire(imgFile);
     }
 }

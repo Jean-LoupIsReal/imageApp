@@ -110,6 +110,7 @@ public class Image {
         BufferedReader lecture = new BufferedReader(new FileReader(f));
         String ligne = null;
         int nbrLignes = 1;
+        matricePixel = new Pixel[dimY][dimX];
 
         try {
             while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les lignes
@@ -121,33 +122,36 @@ public class Image {
                     setDimX(Integer.parseInt(dimension[1]));
                 }
                 nbrLignes++;
-                //System.out.println(ligne);
+                System.out.println(ligne);
             }
             //creationMatrice();
 
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier n'a pas pu être trouvé !");
         } catch (IOException e){
-            e.printStackTrace();
+            System.out.println("Impossible de lire le contenu du fichier !");
         }finally {
             lecture.close();
         }
     }
-
-    public void creationMatrice(){
-
-        matricePixel = new Pixel[dimY][dimX];
-
-        if(Objects.equals(getFormat(), "P2")){
-            for(int i = 0; i < getDimY(); i++){
-                for(int j = 0; j < getDimX(); j++){
-                   matricePixel[i][j] = new PixelNoirBlanc();
-                    System.out.print(matricePixel[i][j] + " ");
-                }
-                System.out.println();
-            }
-        } else {
-            System.out.println("HERE");
-        }
-    }
+//
+//    public void creationMatrice(){
+//        matricePixel = new Pixel[dimY][dimX];
+//
+//        if(Objects.equals(getFormat(), "P2")){
+//            for(int i = 0; i < getDimY(); i++){
+//                for(int j = 0; j < getDimX(); j++){
+//                   matricePixel[i][j] = new PixelNoirBlanc();
+//                    System.out.print(matricePixel[i][j] + " ");
+//                }
+//                System.out.println();
+//            }
+//        } else if(Objects.equals(getFormat(), "P3")) {
+//
+//        } else {
+//            System.out.println("La matrice n'a pas plus être rempli !");
+//        }
+//    }
 
     /**
      * @param i doit etre une image que l'on desire écrire dans un fichier
