@@ -223,45 +223,45 @@ public class Image {
     /**
      * @return le pixiel qui revient le plus souvent
      */
-public RGB couleur_predominante(Image i){
-        //Crée une liste pour compter le nombre de pixel different
-        ArrayList<CompteurPixel> liste = new ArrayList<CompteurPixel>();
-        //objet pour compter le nombre de fois qu'un pixel est dans une image
-        CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[0][0].getCouleur());
-        //Ajoute le premier objet pour entrer dans la boucle prenant a compte la size de la liste
-        liste.add(compteurPixel);
-        // regarde si la couleur est dans la liste
-        boolean est_dans_liste;
+    public RGB couleur_predominante(Image i){
+            //Crée une liste pour compter le nombre de pixel different
+            ArrayList<CompteurPixel> liste = new ArrayList<CompteurPixel>();
+            //objet pour compter le nombre de fois qu'un pixel est dans une image
+            CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[0][0].getCouleur());
+            //Ajoute le premier objet pour entrer dans la boucle prenant a compte la size de la liste
+            liste.add(compteurPixel);
+            // regarde si la couleur est dans la liste
+            boolean est_dans_liste;
 
-        //Boucle pour regarder dans l'antieretee de la matrix de pixel
-        for(int y = 0; y < i.getDimY(); y++)
-        {
-            for(int x = 0; x < i.getDimY(); x++)
+            //Boucle pour regarder dans l'antieretee de la matrix de pixel
+            for(int y = 0; y < i.getDimY(); y++)
             {
-                est_dans_liste = false;
-                //entre dans la liste
-                for(int t = 0; t < liste.size(); t++){
-                    //
-                    if(liste.get(t).couleur.compare(i.getMatrixPixel()[y][x].getCouleur())){
-                        liste.get(t).nb++;
-                        est_dans_liste = true;
+                for(int x = 0; x < i.getDimY(); x++)
+                {
+                    est_dans_liste = false;
+                    //entre dans la liste
+                    for(int t = 0; t < liste.size(); t++){
+                        //
+                        if(liste.get(t).couleur.compare(i.getMatrixPixel()[y][x].getCouleur())){
+                            liste.get(t).nb++;
+                            est_dans_liste = true;
+                        }
+                    }
+                    if(!(est_dans_liste)){
+                        compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[y][x].getCouleur());
+                        liste.add(compteurPixel);
                     }
                 }
-                if(!(est_dans_liste)){
-                    compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[y][x].getCouleur());
-                    liste.add(compteurPixel);
+            }
+            //iterator de la liste
+            int itPredominant = 0;
+            //Boucle qui verifie dans la liste quel est la couleur predominante
+            for(int it = 0; it < liste.size(); it++){
+                if(liste.get(itPredominant).nb < liste.get(it).nb){
+                    itPredominant = it;
                 }
             }
-        }
-        //iterator de la liste
-        int itPredominant = 0;
-        //Boucle qui verifie dans la liste quel est la couleur predominante
-        for(int it = 0; it < liste.size(); it++){
-            if(liste.get(itPredominant).nb < liste.get(it).nb){
-                itPredominant = it;
-            }
-        }
-        return liste.get(itPredominant).couleur;
+            return liste.get(itPredominant).couleur;
     }
     /**
      *

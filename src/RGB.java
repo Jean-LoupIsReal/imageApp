@@ -1,3 +1,4 @@
+import java.io.*;
 public class RGB {
     private int R;
     private int G;
@@ -65,10 +66,10 @@ public class RGB {
         return identique;
     }
 
-    /**public void ecrire(out)
+    public void ecrire(PrintStream out)
     {
-        out(this.R + " " + this.G + " " + this.B + " ")
-    }*/
+        out.print(this.R + " " + this.G + " " + this.B + " ");
+    }
 
 
 }

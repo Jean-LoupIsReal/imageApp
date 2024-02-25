@@ -5,6 +5,7 @@
  *
  * Cette classe est la classe fille de Pixel et elle implémente les pixels en noir et blanc
  */
+import java.io.*;
 public class PixelNoirBlanc implements Pixel {
     protected int teinte;
 
@@ -46,7 +47,7 @@ public class PixelNoirBlanc implements Pixel {
     public RGB getCouleur(){
         return new RGB(teinte,teinte,teinte);
     }
-    /**public void ecrire(out){
-        out(teinte)
-    }*/
+    public void ecrire(PrintStream out){
+        out.print(teinte + " ");
+    }
 }

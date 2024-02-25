@@ -5,6 +5,7 @@
  *
  * Cette classe est la classe fille de Pixel et elle implémente les pixels de couleur
  */
+import java.io.*;
 public class PixelCouleur extends PixelNoirBlanc{
     private RGB couleur;
 
@@ -45,7 +46,7 @@ public class PixelCouleur extends PixelNoirBlanc{
     public RGB getCouleur(){
         return this.couleur;
     }
-    /**public void ecrire(out){
-        couleur.ecrir(out)
-     }*/
+    public void ecrire(PrintStream out){
+        couleur.ecrire(out);
+     }
 }
