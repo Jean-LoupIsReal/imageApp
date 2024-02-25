@@ -133,6 +133,7 @@ public class Image {
     }
 
     public void creationMatrice(){
+
         matricePixel = new Pixel[dimY][dimX];
 
         if(Objects.equals(getFormat(), "P2")){
