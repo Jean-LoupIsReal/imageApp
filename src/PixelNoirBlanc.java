@@ -6,7 +6,7 @@
  * Cette classe est la classe fille de Pixel et elle implémente les pixels en noir et blanc
  */
 public class PixelNoirBlanc implements Pixel {
-    private int teinte;
+    protected int teinte;
 
     /**
      *Cette méthode est appelée lors de la création d'un nouvel object Image

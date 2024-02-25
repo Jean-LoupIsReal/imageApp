@@ -141,7 +141,7 @@ public class Image {
         i1.setDimX(i2.getDimX());
         i1.setDimY(i2.getDimY());
         i1.setFormat(i2.getFormat());
-        i1.setNomFichier(i2.getNomFichier());
+        i1.setNomFichier(i2.getNomFichier() + "(copie)");
         i1.setMatricePixel(i2.getMatrixPixel());
     }
     
@@ -287,11 +287,11 @@ public RGB couleur_predominante(Image i){
      * @param pourcentage est la valeur selon laquel on veut éclaircir/noircir l'image, 100 = valeur initiale
      */
     public void eclaircirNoircir(int pourcentage){
-        for(int x = 0; x < i.getDimX(); x++)
+        for(int x = 0; x < getDimX(); x++)
         {
-            for(int y = 0; y < i.getDimY(); y++)
+            for(int y = 0; y < getDimY(); y++)
             {
-                matriceTemp[y][x].setTeinte(matriceTemp[y][x].getTeinte() * pourcentage/100);
+                matricePixel[y][x].setTeinte(matricePixel[y][x].getTeinte() * pourcentage/100);
             }
         }
     }

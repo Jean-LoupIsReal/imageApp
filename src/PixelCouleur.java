@@ -14,21 +14,21 @@ public class PixelCouleur extends PixelNoirBlanc{
      * @version 1.0
      * @param couleur
      */
-    public PixelCouleur(RGB couleur){
-        setCouleur(couleur);
-        setTeinte(255);
+    public PixelCouleur(RGB couleur) {
+        this.setCouleur(couleur);
+        this.teinte = 255;
+    }
     /**
      * Cette méthode attribut une valeur au pixel
      * @param teinte est la valeur de la couleur / 255
      */
     @Override
-    public int setTeinte(int teinte){
+    public void setTeinte(int teinte){
         this.teinte = teinte;
         //définit les valeur selon une regle de 3
-        this.couleur.setR((this.couleur.R * teinte) /255);
-        this.couleur.setG((this.couleur.G * teinte) /255);
-        this.couleur.setB((this.couleur.B * teinte) /255);
-
+        this.couleur.setR((this.couleur.getR() * teinte) /255);
+        this.couleur.setG((this.couleur.getG() * teinte) /255);
+        this.couleur.setB((this.couleur.getB() * teinte) /255);
     }
     /**
      * Cette méthode attribut une valeur au pixel

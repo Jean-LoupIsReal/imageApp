@@ -11,20 +11,20 @@ public class RGB {
     public int getR() {
 
         if(R > 255)
-            return 255
+            return 255;
         return R;
     }
 
     public int getG() {
 
         if(G > 255)
-            return 255
+            return 255;
     return G;
     }
 
     public int getB() {
         if(B > 255)
-            return 255
+            return 255;
         return B;
     }
     /**
@@ -32,7 +32,7 @@ public class RGB {
      * @param r est la couleur en rouge
      */
     public void setR(int r) {
-        else if (r < 0)
+        if (r < 0)
             //ajouter Exception
             System.out.print("G de rgb a recu une valeur invalide");
         R = r;
@@ -42,7 +42,7 @@ public class RGB {
      * @param g est la couleur en vert
      */
     public void setG(int g) {
-        else if (g < 0)
+        if (g < 0)
             // ajouter Exception
             System.out.print("G de rgb a recu une valeur invalide");
         G = g;
@@ -52,7 +52,7 @@ public class RGB {
      * @param b est la couleur en bleu
      */
     public void setB(int b) {
-        else if (b < 0)
+        if (b < 0)
             // ajouter Exception
             System.out.print("B de rgb a recu une valeur invalide");
         B = b;
@@ -65,10 +65,10 @@ public class RGB {
         return identique;
     }
 
-    public void ecrire(out)
+    /**public void ecrire(out)
     {
         out(this.R + " " + this.G + " " + this.B + " ")
-    }
+    }*/
 
 
 }
