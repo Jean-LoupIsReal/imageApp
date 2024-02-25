@@ -36,6 +36,7 @@ public class Image {
         this.format = format;
     }
 
+    //Constructeur sans paramètre
     public Image(){
         this(null, null, null, 0,0);
     }
@@ -96,7 +97,7 @@ public class Image {
     }
 
     /**
-     * @param dimY doit prendre une dimention en int pour la hauteur en y
+     * @param dimY doit prendre une dimension en int pour la hauteur en y
      */
     public void setDimY(int dimY) {
         this.dimY = dimY;
@@ -110,7 +111,6 @@ public class Image {
         BufferedReader lecture = new BufferedReader(new FileReader(f));
         String ligne = null;
         int nbrLignes = 1;
-        matricePixel = new Pixel[dimY][dimX];
 
         try {
             while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les lignes
@@ -118,14 +118,24 @@ public class Image {
                 if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
                     setFormat(ligne);
                 } else if (nbrLignes == 2) {            //Prend les dimensions de la 2ᵉ ligne et l'affecte à dimY et DimX
-                    setDimY(Integer.parseInt(dimension[0]));
-                    setDimX(Integer.parseInt(dimension[1]));
+                    setDimX(Integer.parseInt(dimension[0]));
+                    setDimY(Integer.parseInt(dimension[1]));
+                } else if(nbrLignes == 3) {
+                    nbrLignes++;
+                } else {
+                   creationMatrice(ligne);
+//                    Pixel[][] matricePixels = new Pixel[dimY][dimX];
+//                    for(int x = 0; x < getDimX(); x++) {
+//                        for(int y = 0; y < getDimY(); y++) {
+//                            matricePixels[y][x].setTeinte(Integer.parseInt(dimension[x]));
+//                            System.out.print(matricePixel[y][x] + " ");
+//                        }
+//                        System.out.println();
+//                    }
                 }
                 nbrLignes++;
-                System.out.println(ligne);
+               //System.out.println(ligne);
             }
-            //creationMatrice();
-
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier n'a pas pu être trouvé !");
         } catch (IOException e){
@@ -134,24 +144,26 @@ public class Image {
             lecture.close();
         }
     }
-//
-//    public void creationMatrice(){
-//        matricePixel = new Pixel[dimY][dimX];
-//
-//        if(Objects.equals(getFormat(), "P2")){
-//            for(int i = 0; i < getDimY(); i++){
-//                for(int j = 0; j < getDimX(); j++){
-//                   matricePixel[i][j] = new PixelNoirBlanc();
-//                    System.out.print(matricePixel[i][j] + " ");
-//                }
-//                System.out.println();
-//            }
-//        } else if(Objects.equals(getFormat(), "P3")) {
-//
-//        } else {
-//            System.out.println("La matrice n'a pas plus être rempli !");
-//        }
-//    }
+
+    public void creationMatrice(String valeur){
+        matricePixel = new Pixel[dimY][dimX];
+        String[] valeurs = valeur.split(" ");
+
+        if(Objects.equals(getFormat(), "P2")){
+            for(int x = 0; x < getDimX() - 1; x++){
+                for(int y = 0; y < getDimY() - 1; y++){
+                    matricePixel[y][x] = new PixelNoirBlanc();
+                    matricePixel[y][x].setTeinte(Integer.parseInt(valeurs[x]));
+//                    System.out.print(matricePixel[x][y] + " ");
+                }
+  //              System.out.println();
+            }
+        } else if(Objects.equals(getFormat(), "P3")) {
+
+        } else {
+            System.out.println("La matrice n'a pas plus être rempli !");
+        }
+    }
 
     /**
      * @param i doit etre une image que l'on desire écrire dans un fichier
@@ -172,7 +184,7 @@ public class Image {
     }
 
     /**
-     * @param i Contien l'image de laquel l'on désire extraire une partie
+     * @param i Contient l'image de laquel l'on désire extraire une partie
      * @param p1 y du point 1
      * @param c1 x du point 1
      * @param p2 y du point 2
