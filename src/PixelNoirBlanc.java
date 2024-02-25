@@ -18,15 +18,13 @@ public class PixelNoirBlanc implements Pixel {
         setTeinte(luminosite);
     }
     public PixelNoirBlanc(){
-        setTeinte(255);
+        setTeinte(0);
     }
     /**
      * Cette méthode attribut une valeur au pixel
      * @param teinte
      */
     public void setTeinte(int teinte) {
-        if(teinte > 255)
-            this.teinte = 255;
         if(teinte < 0)
             // a ajouter Exception
             System.out.print("luminosite de PixelNoirBlanc a recu une valeur invalide");
@@ -37,6 +35,8 @@ public class PixelNoirBlanc implements Pixel {
      * @return value du Pixel
      */
     public int getTeinte(){
+        if(this.teinte > 255)
+            return 255;
         return this.teinte;
     }
     /**
@@ -44,7 +44,7 @@ public class PixelNoirBlanc implements Pixel {
      * @return value du Pixel
      */
     public RGB getCouleur(){
-        return new RGB(teinte,teinte,teinte);
+        return new RGB(this.teinte, this.teinte, this.teinte);
     }
     /**public void ecrire(out){
         out(teinte)
