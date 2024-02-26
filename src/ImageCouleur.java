@@ -35,9 +35,8 @@ public class ImageCouleur extends Image{
 
             for (int j = 0; j < i.getDimY(); j++) {
                 for (int k = 0; k < i.getDimX(); k++) {
-                    //ps.print(this.matricePixel[j][k].getValeur());  //écriture du pixel correspondant au coo
-                    ps.print("89 56 150");
-                    ps.print(" ");      //Séparation de chaque pixel par un espace
+                    ps.print(i.getMatricePixel()[j][k].toString());  //écriture du pixel correspondant au coo
+                    //ps.print(" ");      //Séparation de chaque pixel par un espace
                 }
                 ps.println();       //Retour à la ligne
             }
