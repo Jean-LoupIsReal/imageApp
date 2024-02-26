@@ -20,9 +20,9 @@ public class Main {
 
 //==================Test noir et blanc====================================
 
-        String fileName = "Sherbrooke_Frontenac_nuit";
+        fileName = "Sherbrooke_Frontenac_nuit";
         String formatBW = "pgm";
-        Image test = new Image();
+        test = new Image();
         File imgFileBW = new File(fileName + "." + formatBW);
 
         File newImgFileBW = new File(fileName + "BW." + formatBW);
