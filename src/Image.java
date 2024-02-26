@@ -1,8 +1,9 @@
 /**
  * Cette classe est la classe mère qui contient toute les methodes pour modifier une image
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
 
 import java.io.*;
@@ -144,6 +145,7 @@ public class Image {
             scanne.close();
         }
     }
+
 
     public void affecteMatriceP2(Scanner scanne){
         for (int y = 0; y < getDimY(); y++) {
