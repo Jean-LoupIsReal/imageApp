@@ -1,4 +1,5 @@
 import java.io.*;
+
 public class RGB {
     private int R;
     private int G;
@@ -72,4 +73,7 @@ public class RGB {
     }
 
 
+    public String toString(){
+        return Integer.toString(R) + " " + Integer.toString(G) + " " + Integer.toString(B) + " ";
+    }
 }

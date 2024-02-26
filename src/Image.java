@@ -6,8 +6,7 @@
  */
 import javax.swing.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Image {
 
@@ -33,13 +32,14 @@ public class Image {
         this.matricePixel = matricePixel;
     }
 
-    public Image(String nomFichier, String format) {
-        this.nomFichier = nomFichier;
-        this.format = format;
-    }
+//    public Image(String nomFichier, String format) {
+//        this.nomFichier = nomFichier;
+//        this.format = format;
+//    }
 
-    public Image() {
-        this(null,null,null,0,0);
+    //Constructeur sans paramètre
+    public Image(){
+        this(null, null, null, 0,0);
     }
 
     /**
@@ -98,7 +98,7 @@ public class Image {
     }
 
     /**
-     * @param dimY doit prendre une dimention en int pour la hauteur en y
+     * @param dimY doit prendre une dimension en int pour la hauteur en y
      */
     public void setDimY(int dimY) {
         this.dimY = dimY;
@@ -110,25 +110,49 @@ public class Image {
     public void lire(File f) throws FileNotFoundException {
         //Récupère le fichier et le lit mot par mot
         Scanner scanne = new Scanner(f);
-
         try {
-            if(scanne.hasNextLine()) {
+            if(scanne.hasNextLine()) {  // Lit la premiere ligne et affecte le format
                 String premiereLigne = scanne.nextLine();
                 setFormat(premiereLigne);
                 System.out.println("Format : " + premiereLigne);
-                if (scanne.hasNextLine()) {
+
+                if (scanne.hasNextLine()) { //Lit la deuxième ligne et affecte X et Y
                     int dimX = scanne.nextInt();
                     int dimY = scanne.nextInt();
                     setDimY(dimY);
                     setDimX(dimX);
+                    matricePixel = new Pixel[dimY][dimX];
                     System.out.println("Dimensions : " + dimX + " x " + dimY);
                 }
-                if(scanne.hasNextLine()){
-                   scanne.nextInt();
-                }
-                while (scanne.hasNext()) {  //Boucle while qui lit toutes les lignes
-                    String valeur = scanne.next();
-                    //creationMatrice(valeur);
+                while (scanne.hasNext()) {  //Boucle while qui lit valeur par valeur après les 2 premieres lignes
+                    String valeur = scanne.next(); // Prend la valeur 255 et ne la compte pas dans la matrice
+
+                    if(Objects.equals(getFormat(), "P2")) { // Crée une matrice à partir d'un fichier P2(PGM)
+                        for (int y = 0; y < getDimY(); y++) {
+                            for (int x = 0; x < getDimX(); x++) {
+                                matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
+                                if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
+                                    matricePixel[y][x].setTeinte(scanne.nextInt());
+                                }
+                              //  System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
+                            }
+                            // System.out.println();
+                        }
+                    } else if(Objects.equals(getFormat(), "P3")) { // Crée une matrice à partir d'un fichier P3(PPM)
+                        for (int y = 0; y < getDimY(); y++) {
+                            for (int x = 0; x < getDimX(); x++) {
+                                if (scanne.hasNextInt()) { //Si, c'est le prochain élément lu pour R, G et B, on l'affecte dans la matrice
+                                    int r = scanne.nextInt();
+                                    int g = scanne.nextInt();
+                                    int b = scanne.nextInt();
+
+                                    matricePixel[y][x] = new PixelCouleur(new RGB(r, g, b)); // Nouvelle instance pour une matrice avec des RGB
+                                }
+                               // System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
+                            }
+                            // System.out.println();
+                        }
+                    }
                 }
             } else {
                 System.out.println("Le fichier n'a pas pu être lu");
@@ -158,7 +182,7 @@ public class Image {
     }
     
     /**
-     * @param i Contien l'image de laquel l'on désire extraire une partie
+     * @param i Contient l'image de laquel l'on désire extraire une partie
      * @param p1 y du point 1
      * @param c1 x du point 1
      * @param p2 y du point 2
@@ -309,4 +333,3 @@ public class Image {
     }
 
 }
-

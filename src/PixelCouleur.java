@@ -49,4 +49,8 @@ public class PixelCouleur extends PixelNoirBlanc{
     public void ecrire(PrintStream out){
         couleur.ecrire(out);
      }
+
+    public String toString(){
+        return this.couleur.toString();
+    }
 }
