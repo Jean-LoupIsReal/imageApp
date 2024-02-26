@@ -45,5 +45,5 @@ public class PixelNoirBlanc implements Pixel {
         return new RGB(teinte,teinte,teinte);
     }
 
-    public String toString(){return Integer.toString(teinte);}
+    public String toString(){return Integer.toString(teinte) +  " ";}
 }

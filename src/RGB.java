@@ -47,5 +47,7 @@ public class RGB {
         return identique;
     }
 
-
+    public String toString(){
+        return Integer.toString(R) + " " + Integer.toString(G) + " " + Integer.toString(B) + " ";
+    }
 }

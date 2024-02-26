@@ -33,5 +33,7 @@ public class PixelCouleur extends PixelNoirBlanc{
         return this.couleur;
     }
 
-
+    public String toString(){
+        return this.couleur.toString();
+    }
 }
