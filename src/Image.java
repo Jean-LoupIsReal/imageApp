@@ -122,6 +122,9 @@ public class Image {
                     setDimX(dimX);
                     System.out.println("Dimensions : " + dimX + " x " + dimY);
                 }
+                if(scanne.hasNextLine()){
+                   scanne.nextInt();
+                }
                 while (scanne.hasNext()) {  //Boucle while qui lit toutes les lignes
                     String valeur = scanne.next();
                     creationMatrice(valeur);
@@ -141,8 +144,7 @@ public class Image {
         if(Objects.equals(getFormat(), "P2")){
             for(int x = 0; x < getDimX(); x++){
                 for(int y = 0; y < getDimY(); y++){
-                    matricePixel[y][x] = new PixelNoirBlanc();
-                    matricePixel[y][x].setTeinte(Integer.parseInt(valeur));
+                    matricePixel[y][x] = new PixelNoirBlanc(Integer.parseInt(valeur));
                     System.out.print(matricePixel[y][x].getTeinte() + " ");
                 }
                 System.out.println();
