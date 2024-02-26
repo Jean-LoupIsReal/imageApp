@@ -4,7 +4,7 @@
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
  */
-import javax.swing.*;
+
 import java.io.*;
 import java.util.*;
 
@@ -85,7 +85,7 @@ public class Image {
     }
 
     /**
-     * @param dimX doit prendre une dimention en int pour la longueur en x
+     * @param dimX doit prendre une dimension en int pour la longueur en X
      */
     public void setDimX(int dimX) {
         this.dimX = dimX;
@@ -98,7 +98,7 @@ public class Image {
     }
 
     /**
-     * @param dimY doit prendre une dimension en int pour la hauteur en y
+     * @param dimY doit prendre une dimension en int pour la hauteur en Y
      */
     public void setDimY(int dimY) {
         this.dimY = dimY;
@@ -114,7 +114,7 @@ public class Image {
             if(scanne.hasNextLine()) {  // Lit la premiere ligne et affecte le format
                 String premiereLigne = scanne.nextLine();
                 setFormat(premiereLigne);
-                System.out.println("Format : " + premiereLigne);
+                // System.out.println("Format : " + premiereLigne); // Pour vérifier si la premiere ligne prend bien le format
 
                 if (scanne.hasNextLine()) { //Lit la deuxième ligne et affecte X et Y
                     int dimX = scanne.nextInt();
@@ -122,7 +122,7 @@ public class Image {
                     setDimY(dimY);
                     setDimX(dimX);
                     matricePixel = new Pixel[dimY][dimX];
-                    System.out.println("Dimensions : " + dimX + " x " + dimY);
+                   // System.out.println("Dimensions : " + dimX + " x " + dimY); // Pour vérifier si la deuxieme ligne prend bien les dimensions
                 }
                 while (scanne.hasNext()) {  //Boucle while qui lit valeur par valeur après les 2 premieres lignes
                     String valeur = scanne.next(); // Prend la valeur 255 et ne la compte pas dans la matrice
@@ -134,9 +134,9 @@ public class Image {
                                 if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
                                     matricePixel[y][x].setTeinte(scanne.nextInt());
                                 }
-                              //  System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
+                                //System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
                             }
-                            // System.out.println();
+                             //System.out.println();                    //Saut de ligne
                         }
                     } else if(Objects.equals(getFormat(), "P3")) { // Crée une matrice à partir d'un fichier P3(PPM)
                         for (int y = 0; y < getDimY(); y++) {
@@ -148,16 +148,17 @@ public class Image {
 
                                     matricePixel[y][x] = new PixelCouleur(new RGB(r, g, b)); // Nouvelle instance pour une matrice avec des RGB
                                 }
-                               // System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
+                                //System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
                             }
-                            // System.out.println();
+                             //System.out.println();                    //Saut de ligne
                         }
                     }
                 }
             } else {
-                System.out.println("Le fichier n'a pas pu être lu");
-                return ;
+                throw new FileNotFoundException("Le fichier n'a pas pu être trouvé");
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier n'a pas été trouvé");
         } finally {
             scanne.close();
         }
@@ -318,7 +319,7 @@ public class Image {
     }
     /**
      *
-     * Cette fonction éclairci/noirci l'image au complet
+     * Cette fonction éclaircir/noircir l'image au complet
      *
      * @param pourcentage est la valeur selon laquel on veut éclaircir/noircir l'image, 100 = valeur initiale
      */
@@ -331,5 +332,4 @@ public class Image {
             }
         }
     }
-
 }
