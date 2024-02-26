@@ -76,7 +76,7 @@ public class Image {
     /**
      * @return la dimention en x de l'object
      */
-    public Pixel[][] getMatrixPixel(){return this.matricePixel;}
+    public Pixel[][] getMatricePixel(){return this.matricePixel;}
     /**
      * @return la dimention en x de l'object
      */
@@ -179,7 +179,7 @@ public class Image {
         i1.setDimY(i2.getDimY());
         i1.setFormat(i2.getFormat());
         i1.setNomFichier(i2.getNomFichier() + "(copie)");
-        i1.setMatricePixel(i2.getMatrixPixel());
+        i1.setMatricePixel(i2.getMatricePixel());
     }
     
     /**
@@ -204,7 +204,7 @@ public class Image {
         {
             for(int x = 0; x < nouvDimX; x++)
             {
-                matriceTemp[y][x] = i.getMatrixPixel()[p1 + y][c1 + x];
+                matriceTemp[y][x] = i.getMatricePixel()[p1 + y][c1 + x];
             }
         }
         //Entre les nouvelles informations dans un nouvel objet
@@ -226,7 +226,7 @@ public class Image {
         {
             for(int y = 0; y < nouvDimY; y++)
             {
-                matriceTemp[y][x] = i.getMatrixPixel()[y][x];
+                matriceTemp[y][x] = i.getMatricePixel()[y][x];
             }
         }
         Image nouvelleImg = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
@@ -250,8 +250,8 @@ public class Image {
             {
                 for(int y = 0; y < i1.getDimY(); y++)
                 {
-                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
-                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+                    identique = identique && i1.getMatricePixel()[y][x].getTeinte() == i2.getMatricePixel()[y][x].getTeinte();
+                    identique = identique && i1.getMatricePixel()[y][x].getCouleur().compare(i2.getMatricePixel()[y][x].getCouleur());
                 }
             }
         }
@@ -264,7 +264,7 @@ public class Image {
             //Crée une liste pour compter le nombre de pixel different
             ArrayList<CompteurPixel> liste = new ArrayList<CompteurPixel>();
             //objet pour compter le nombre de fois qu'un pixel est dans une image
-            CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[0][0].getCouleur());
+            CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatricePixel()[0][0].getCouleur());
             //Ajoute le premier objet pour entrer dans la boucle prenant a compte la size de la liste
             liste.add(compteurPixel);
             // regarde si la couleur est dans la liste
@@ -279,13 +279,13 @@ public class Image {
                     //entre dans la liste
                     for(int t = 0; t < liste.size(); t++){
                         //
-                        if(liste.get(t).couleur.compare(i.getMatrixPixel()[y][x].getCouleur())){
+                        if(liste.get(t).couleur.compare(i.getMatricePixel()[y][x].getCouleur())){
                             liste.get(t).nb++;
                             est_dans_liste = true;
                         }
                     }
                     if(!(est_dans_liste)){
-                        compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[y][x].getCouleur());
+                        compteurPixel = new CompteurPixel(0, i.getMatricePixel()[y][x].getCouleur());
                         liste.add(compteurPixel);
                     }
                 }
@@ -312,7 +312,7 @@ public class Image {
         {
             for(int y = 0; y < i.getDimY(); y++)
             {
-                matriceTemp[x][y] = i.getMatrixPixel()[y][x];
+                matriceTemp[x][y] = i.getMatricePixel()[y][x];
             }
         }
         i.setMatricePixel(matriceTemp);

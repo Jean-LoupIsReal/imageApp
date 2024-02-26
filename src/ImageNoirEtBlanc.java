@@ -42,8 +42,7 @@ public class ImageNoirEtBlanc  extends Image{
 
             for (int j = 0; j < i.getDimY(); j++) {
                 for (int k = 0; k < i.getDimX(); k++) {
-                    //ps.print(this.matricePixel[j][k].getValeur());  //écriture du pixel correspondant au coo
-                    ps.print(89);
+                    ps.print(i.getMatricePixel()[j][k].getTeinte());  //écriture du pixel correspondant au coo
                     ps.print(" ");      //Séparation de chaque pixel par un espace
                 }
                 ps.println();       //Retour à la ligne
