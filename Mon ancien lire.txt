@@ -1,0 +1,38 @@
+ public void lire(File f) throws IOException {
+        //Récupère le fichier et le lit ligne par ligne
+        BufferedReader lecture = new BufferedReader(new FileReader(f));
+        String ligne = null;
+        int nbrLignes = 1;
+
+        try {
+            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les lignes
+                String[] dimension = ligne.split(" ");
+                if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
+                    setFormat(ligne);
+                } else if (nbrLignes == 2) {            //Prend les dimensions de la 2ᵉ ligne et l'affecte à dimY et DimX
+                    setDimX(Integer.parseInt(dimension[0]));
+                    setDimY(Integer.parseInt(dimension[1]));
+                } else if(nbrLignes == 3) {
+                    nbrLignes++;
+                } else {
+                   creationMatrice(ligne);
+//                    Pixel[][] matricePixels = new Pixel[dimY][dimX];
+//                    for(int x = 0; x < getDimX(); x++) {
+//                        for(int y = 0; y < getDimY(); y++) {
+//                            matricePixels[y][x].setTeinte(Integer.parseInt(dimension[x]));
+//                            System.out.print(matricePixel[y][x] + " ");
+//                        }
+//                        System.out.println();
+//                    }
+                }
+                nbrLignes++;
+                //System.out.println(ligne);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier n'a pas pu être trouvé !");
+        } catch (IOException e){
+            System.out.println("Impossible de lire le contenu du fichier !");
+        }finally {
+            lecture.close();
+        }
+    }
