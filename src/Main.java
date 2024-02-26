@@ -55,6 +55,6 @@ public class Main {
 
         System.out.println("La couleur principale de l'image en noir et blanc est: " + test.couleur_predominante(test).toString());
         // Fonctionne
-        ImageNoirEtBlanc testReduire = newImgBW.reduire(newImgC);
+        //ImageNoirEtBlanc testReduire = newImgBW.reduire(newImgC);
     }
 }

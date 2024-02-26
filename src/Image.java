@@ -226,6 +226,7 @@ public class Image {
             return imageTemp;
         }
 
+        return null;
     }
 
     /**
