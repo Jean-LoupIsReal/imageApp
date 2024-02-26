@@ -5,7 +5,7 @@
  * @author Jean-Loup Dandurand-Pominville
  */
 import java.io.*;
-import java.util.Objects;
+import java.util.*;
 
 public class Image {
 
@@ -31,10 +31,10 @@ public class Image {
         this.matricePixel = matricePixel;
     }
 
-    public Image(String nomFichier, String format) {
-        this.nomFichier = nomFichier;
-        this.format = format;
-    }
+//    public Image(String nomFichier, String format) {
+//        this.nomFichier = nomFichier;
+//        this.format = format;
+//    }
 
     //Constructeur sans paramètre
     public Image(){
@@ -106,57 +106,46 @@ public class Image {
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
      * Permet de lire l'information d'un fichier
      */
-    public void lire(File f) throws IOException {
-        //Récupère le fichier et le lit ligne par ligne
-        BufferedReader lecture = new BufferedReader(new FileReader(f));
-        String ligne = null;
-        int nbrLignes = 1;
+    public void lire(File f) throws FileNotFoundException {
+        //Récupère le fichier et le lit mot par mot
+        Scanner scanne = new Scanner(f);
 
         try {
-            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les lignes
-                String[] dimension = ligne.split(" ");
-                if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
-                    setFormat(ligne);
-                } else if (nbrLignes == 2) {            //Prend les dimensions de la 2ᵉ ligne et l'affecte à dimY et DimX
-                    setDimX(Integer.parseInt(dimension[0]));
-                    setDimY(Integer.parseInt(dimension[1]));
-                } else if(nbrLignes == 3) {
-                    nbrLignes++;
-                } else {
-                   creationMatrice(ligne);
-//                    Pixel[][] matricePixels = new Pixel[dimY][dimX];
-//                    for(int x = 0; x < getDimX(); x++) {
-//                        for(int y = 0; y < getDimY(); y++) {
-//                            matricePixels[y][x].setTeinte(Integer.parseInt(dimension[x]));
-//                            System.out.print(matricePixel[y][x] + " ");
-//                        }
-//                        System.out.println();
-//                    }
+            if(scanne.hasNextLine()) {
+                String premiereLigne = scanne.nextLine();
+                setFormat(premiereLigne);
+                System.out.println("Format : " + premiereLigne);
+                if (scanne.hasNextLine()) {
+                    int dimX = scanne.nextInt();
+                    int dimY = scanne.nextInt();
+                    setDimY(dimY);
+                    setDimX(dimX);
+                    System.out.println("Dimensions : " + dimX + " x " + dimY);
                 }
-                nbrLignes++;
-               //System.out.println(ligne);
+                while (scanne.hasNext()) {  //Boucle while qui lit toutes les lignes
+                    String valeur = scanne.next();
+                    creationMatrice(valeur);
+                }
+            } else {
+                System.out.println("Le fichier n'a pas pu être lu");
+                return ;
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Le fichier n'a pas pu être trouvé !");
-        } catch (IOException e){
-            System.out.println("Impossible de lire le contenu du fichier !");
-        }finally {
-            lecture.close();
+        } finally {
+            scanne.close();
         }
     }
 
     public void creationMatrice(String valeur){
         matricePixel = new Pixel[dimY][dimX];
-        String[] valeurs = valeur.split(" ");
 
         if(Objects.equals(getFormat(), "P2")){
-            for(int x = 0; x < getDimX() - 1; x++){
-                for(int y = 0; y < getDimY() - 1; y++){
+            for(int x = 0; x < getDimX(); x++){
+                for(int y = 0; y < getDimY(); y++){
                     matricePixel[y][x] = new PixelNoirBlanc();
-                    matricePixel[y][x].setTeinte(Integer.parseInt(valeurs[x]));
-//                    System.out.print(matricePixel[x][y] + " ");
+                    matricePixel[y][x].setTeinte(Integer.parseInt(valeur));
+                    System.out.print(matricePixel[x][y] + " ");
                 }
-  //              System.out.println();
+                System.out.println();
             }
         } else if(Objects.equals(getFormat(), "P3")) {
 

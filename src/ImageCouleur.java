@@ -8,7 +8,6 @@ import java.io.*;
  * Cette classe implemente une ImageCouleur
  */
 public class ImageCouleur extends Image{
-    private PixelCouleur matricePixel[][];
 
     /**
      * Cette méthode est appelée lors de la création d'un nouvel object ImageCouleur
@@ -16,22 +15,12 @@ public class ImageCouleur extends Image{
      * @param nomFichier
      * @param format
      */
-    public ImageCouleur(String nomFichier, String format) {
-        super(nomFichier, format);
+    public ImageCouleur(String nomFichier, String format, Pixel matricePixel[][], int dimX, int dimY) {
+        super(nomFichier, format, matricePixel, dimX, dimY);;
     }
 
-    /**
-     * @return matricePixel
-     */
-    public PixelCouleur[][] getMatricePixel() {
-        return matricePixel;
-    }
-
-    /**
-     * @param matricePixel
-     */
-    public void setMatricePixel(PixelCouleur[][] matricePixel) {
-        this.matricePixel = matricePixel;
+    public ImageCouleur() {
+        this(null,null, null,0,0);
     }
 
     @Override

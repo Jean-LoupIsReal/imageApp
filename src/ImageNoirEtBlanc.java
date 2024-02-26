@@ -9,7 +9,6 @@ import java.io.*;
  * Cette classe implemente une ImageNoirEtBlanc
  */
 public class ImageNoirEtBlanc  extends Image{
-    private PixelNoirBlanc matricePixel[][];
 
     /**
      * Cette méthode est appelée lors de la création d'un nouvel object ImageNoirEtBlanc
@@ -17,10 +16,13 @@ public class ImageNoirEtBlanc  extends Image{
      * @param nomFichier
      * @param format
      */
-    public ImageNoirEtBlanc(String nomFichier, String format) {
-        super(nomFichier, format);
+    public ImageNoirEtBlanc(String nomFichier, String format, Pixel matricePixel[][], int dimX, int dimY) {
+        super(nomFichier, format, matricePixel, dimX, dimY);
     }
 
+    public ImageNoirEtBlanc() {
+        this(null, null, null, 0,0);
+    }
     /**
      *
      * Cette fonctionne change suivant si l'image est en couleur ou en noir et blanc
@@ -50,19 +52,5 @@ public class ImageNoirEtBlanc  extends Image{
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    /**
-     * @return matricePixel
-     */
-    public PixelNoirBlanc[][] getMatricePixel() {
-        return matricePixel;
-    }
-
-    /**
-     * @param matricePixel
-     */
-    public void setMatricePixel(PixelNoirBlanc[][] matricePixel) {
-        this.matricePixel = matricePixel;
     }
 }

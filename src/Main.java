@@ -2,6 +2,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
         String fileName = "Sherbrooke_Frontenac_nuit";
         String format = "pgm";
         Image test = new Image();
