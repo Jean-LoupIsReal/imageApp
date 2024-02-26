@@ -143,7 +143,7 @@ public class Image {
                 for(int y = 0; y < getDimY(); y++){
                     matricePixel[y][x] = new PixelNoirBlanc();
                     matricePixel[y][x].setTeinte(Integer.parseInt(valeur));
-                    System.out.print(matricePixel[x][y] + " ");
+                    System.out.print(matricePixel[y][x].getTeinte() + " ");
                 }
                 System.out.println();
             }
