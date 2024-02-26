@@ -128,7 +128,7 @@ public class Image {
                 }
                 while (scanne.hasNext()) {  //Boucle while qui lit toutes les lignes
                     String valeur = scanne.next();
-                    creationMatrice(valeur);
+                    //creationMatrice(valeur);
                 }
             } else {
                 System.out.println("Le fichier n'a pas pu être lu");
@@ -136,28 +136,6 @@ public class Image {
             }
         } finally {
             scanne.close();
-        }
-    }
-
-    public void creationMatrice(String valeur){
-        matricePixel = new Pixel[dimY][dimX];
-        Scanner valeurScanner = new Scanner(valeur);
-
-        if(Objects.equals(getFormat(), "P2")){
-            for(int y = 0; y < getDimY(); y++){
-                for(int x = 0; x < getDimX(); x++){
-                    matricePixel[y][x] = new PixelNoirBlanc();
-                    if(valeurScanner.hasNextInt()){
-                        matricePixel[y][x].setTeinte(valeurScanner.nextInt());
-                    }
-                    System.out.print(matricePixel[y][x].getTeinte() + " ");
-                }
-                System.out.println();
-            }
-        } else if(Objects.equals(getFormat(), "P3")) {
-
-        } else {
-            System.out.println("La matrice n'a pas plus être rempli !");
         }
     }
 
