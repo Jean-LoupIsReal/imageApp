@@ -126,29 +126,30 @@ public class Image {
                 while (scanne.hasNext()) {  //Boucle while qui lit valeur par valeur après les 2 premieres lignes
                     String valeur = scanne.next(); // Prend la valeur 255 et ne la compte pas dans la matrice
 
-                    if(Objects.equals(getFormat(), "P2")) {
+                    if(Objects.equals(getFormat(), "P2")) { // Crée une matrice à partir d'un fichier P2(PGM)
                         for (int y = 0; y < getDimY(); y++) {
                             for (int x = 0; x < getDimX(); x++) {
-                                matricePixel[y][x] = new PixelNoirBlanc();
-                                if (scanne.hasNextInt()) {
+                                matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
+                                if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
                                     matricePixel[y][x].setTeinte(scanne.nextInt());
                                 }
                               //  System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
                             }
                             // System.out.println();
                         }
-                    } else if(Objects.equals(getFormat(), "P3")){
-                        int r = 0, g = 0, b = 0;
-
+                    } else if(Objects.equals(getFormat(), "P3")) { // Crée une matrice à partir d'un fichier P3(PPM)
                         for (int y = 0; y < getDimY(); y++) {
                             for (int x = 0; x < getDimX(); x++) {
-                                matricePixel[y][x] = new PixelCouleur(new RGB(r, g, b));
-                                if (scanne.hasNextInt()) {
+                                if (scanne.hasNextInt()) { //Si, c'est le prochain élément lu pour R, G et B, on l'affecte dans la matrice
+                                    int r = scanne.nextInt();
+                                    int g = scanne.nextInt();
+                                    int b = scanne.nextInt();
 
+                                    matricePixel[y][x] = new PixelCouleur(new RGB(r, g, b)); // Nouvelle instance pour une matrice avec des RGB
                                 }
-                                System.out.print(matricePixel[y][x]);
+                               // System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
                             }
-                            System.out.println();
+                            // System.out.println();
                         }
                     }
                 }
