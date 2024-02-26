@@ -1,5 +1,5 @@
 /**
- * Cette méthode est appelée lors de la création d'un nouvel object Image
+ * Cette classe est la classe mère qui contient toute les methodes pour modifier une image
  * @auteur Arthur Andrianjafisolo
  * @autor Audy Altis
  * @author Jean-Loup Dandurand-Pominville
@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 
 public class Image {
-
     private String nomFichier;
     private  String format;
     private Pixel matricePixel[][];
@@ -17,10 +16,10 @@ public class Image {
     private int dimY;
 
     /**
-     * Cette méthode est appelée lors de la création d'un nouvel object Image
-     *
+     * Cette methode est un constructeur d'image avec parametre appelee lors de la création d'un nouvel object Image
      * @param nomFichier
      * @param format
+     * @param matricePixel
      * @param dimX
      * @param dimY
      */
@@ -32,12 +31,9 @@ public class Image {
         this.matricePixel = matricePixel;
     }
 
-//    public Image(String nomFichier, String format) {
-//        this.nomFichier = nomFichier;
-//        this.format = format;
-//    }
-
-    //Constructeur sans paramètre
+    /**
+     * Constructeur d'image sans parametre
+     */
     public Image(){
         this(null, null, null, 0,0);
     }
@@ -69,16 +65,19 @@ public class Image {
     public void setFormat(String format) {
         this.format = format;
     }
+
     /**
-     * @return la dimention en x de l'object
+     * @return la dimension en x de l'object
      */
     public void setMatricePixel(Pixel matricePixel[][]){this.matricePixel = matricePixel;};
+
     /**
-     * @return la dimention en x de l'object
+     * @return la dimension en x de l'object
      */
-    public Pixel[][] getMatrixPixel(){return this.matricePixel;}
+    public Pixel[][] getMatricePixel(){return this.matricePixel;}
+
     /**
-     * @return la dimention en x de l'object
+     * @return la dimension en x de l'object
      */
     public int getDimX() {
         return dimX;
@@ -90,8 +89,9 @@ public class Image {
     public void setDimX(int dimX) {
         this.dimX = dimX;
     }
+
     /**
-     * @return la dimention en y de l'object
+     * @return la dimension en y de l'object
      */
     public int getDimY() {
         return dimY;
@@ -103,9 +103,10 @@ public class Image {
     public void setDimY(int dimY) {
         this.dimY = dimY;
     }
+
     /**
+     * Cette methode lit le contenu d'un fichier PPM ou PGM pour pouvoir cree la matrice de pixel
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
-     * Permet de lire l'information d'un fichier
      */
     public void lire(File f) throws FileNotFoundException {
         //Récupère le fichier et le lit mot par mot
@@ -155,43 +156,45 @@ public class Image {
                     }
                 }
             } else {
-                throw new FileNotFoundException("Le fichier n'a pas pu être trouvé");
+                throw new FileNotFoundException();
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier n'a pas été trouvé");
+            System.out.println("Le fichier n'a pas été trouvé ou n'a pas la bonne extension (Vous devez ouvrir un fichier PGM ou PPM) !");
         } finally {
             scanne.close();
         }
     }
 
     /**
-     * @param i doit etre une image que l'on desire écrire dans un fichier
-     * @param f doit etre un fichier dans lequel l'on va écrire l'information
+     * Cette methode permet d'écrire une nouvelle image grace a la matrice
+     * @param f Contient un fichier dans lequel l'on va écrire la nouvelle image
+     * @param i Contient l'image que l'on desire ecrire dans le fichier f
      */
-
     public void ecrire(File f, Image i) throws FileNotFoundException {}
+
     /**
-     * @param i1 doit etre une image que l'on desire changer
-     * @param i2 doit etre une image que l'on désire dupliquer
+     * Cette methode prend une image et la copie dans une autre
+     * @param i1 Contient l'image d'origine
+     * @param i2 Contient l'on a duplique de i1
      */
     public void copier(Image i1, Image i2){
         i1.setDimX(i2.getDimX());
         i1.setDimY(i2.getDimY());
         i1.setFormat(i2.getFormat());
         i1.setNomFichier(i2.getNomFichier() + "(copie)");
-        i1.setMatricePixel(i2.getMatrixPixel());
+        i1.setMatricePixel(i2.getMatricePixel());
     }
     
     /**
-     * @param i Contient l'image de laquel l'on désire extraire une partie
+     * @param i Contient l'image de laquelle l'on desire extraire une partie
      * @param p1 y du point 1
      * @param c1 x du point 1
      * @param p2 y du point 2
      * @param c2 x du point 2
-     * @return le pixiel qui revient le plus souvent
+     * @return Le pixel qui revient le plus souvent
      */
     public Image extraire(Image i, int p1, int c1, int p2, int c2){
-        //Déclare les nouvelle dimmentions de l'image
+        //Declare les nouvelles dimensions de l'image
         int nouvDimX = c2-c1;
         int nouvDimY = p2-p1;
         //Vérifie que les chiffres entrés soient bons
@@ -204,7 +207,7 @@ public class Image {
         {
             for(int x = 0; x < nouvDimX; x++)
             {
-                matriceTemp[y][x] = i.getMatrixPixel()[p1 + y][c1 + x];
+                matriceTemp[y][x] = i.getMatricePixel()[p1 + y][c1 + x];
             }
         }
         //Entre les nouvelles informations dans un nouvel objet
@@ -213,10 +216,8 @@ public class Image {
     }
 
     /**
-     *
-     * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
-     *
-     * @param i représente l'image d'origine
+     * Cette fonction reduit la taille de l'image passe en parametre par 2 puis l'enregistre en nouvelle image
+     * @param i represente l'image d'origine
      */
     public Image reduire(Image i){
         int nouvDimX = i.getDimX()/2;
@@ -226,16 +227,15 @@ public class Image {
         {
             for(int y = 0; y < nouvDimY; y++)
             {
-                matriceTemp[y][x] = i.getMatrixPixel()[y][x];
+                matriceTemp[y][x] = i.getMatricePixel()[y][x];
             }
         }
         Image nouvelleImg = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return nouvelleImg;
     }
+
     /**
-     *
-     * Cette fonction retourne true si les deux images passé en paramettre sont identiques
-     *
+     * Cette fonction retourne true si les deux images passe en parametre sont identiques
      * @param i1 représente l'image 1
      * @param i2 représente l'image 2
      */
@@ -250,21 +250,22 @@ public class Image {
             {
                 for(int y = 0; y < i1.getDimY(); y++)
                 {
-                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
-                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+                    identique = identique && i1.getMatricePixel()[y][x].getTeinte() == i2.getMatricePixel()[y][x].getTeinte();
+                    identique = identique && i1.getMatricePixel()[y][x].getCouleur().compare(i2.getMatricePixel()[y][x].getCouleur());
                 }
             }
         }
         return identique;
     }
+
     /**
-     * @return le pixiel qui revient le plus souvent
+     * @return Les pixels qui reviennent le plus souvent
      */
     public RGB couleur_predominante(Image i){
             //Crée une liste pour compter le nombre de pixel different
             ArrayList<CompteurPixel> liste = new ArrayList<CompteurPixel>();
             //objet pour compter le nombre de fois qu'un pixel est dans une image
-            CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[0][0].getCouleur());
+            CompteurPixel compteurPixel = new CompteurPixel(0, i.getMatricePixel()[0][0].getCouleur());
             //Ajoute le premier objet pour entrer dans la boucle prenant a compte la size de la liste
             liste.add(compteurPixel);
             // regarde si la couleur est dans la liste
@@ -279,13 +280,13 @@ public class Image {
                     //entre dans la liste
                     for(int t = 0; t < liste.size(); t++){
                         //
-                        if(liste.get(t).couleur.compare(i.getMatrixPixel()[y][x].getCouleur())){
+                        if(liste.get(t).couleur.compare(i.getMatricePixel()[y][x].getCouleur())){
                             liste.get(t).nb++;
                             est_dans_liste = true;
                         }
                     }
                     if(!(est_dans_liste)){
-                        compteurPixel = new CompteurPixel(0, i.getMatrixPixel()[y][x].getCouleur());
+                        compteurPixel = new CompteurPixel(0, i.getMatricePixel()[y][x].getCouleur());
                         liste.add(compteurPixel);
                     }
                 }
@@ -301,9 +302,7 @@ public class Image {
             return liste.get(itPredominant).couleur;
     }
     /**
-     *
-     * Cette fonction fait une rotation de 90 degrés sur l'image reçus en paramettre puis l'enregistre en nouvelle image
-     *
+     * Cette fonction fait une rotation de 90 degres sur l'image recu en parametre puis l'enregistre en tant que nouvelle image
      * @param i représente l'image d'origine
      */
     public void pivoter90(Image i){
@@ -312,16 +311,15 @@ public class Image {
         {
             for(int y = 0; y < i.getDimY(); y++)
             {
-                matriceTemp[x][y] = i.getMatrixPixel()[y][x];
+                matriceTemp[x][y] = i.getMatricePixel()[y][x];
             }
         }
         i.setMatricePixel(matriceTemp);
     }
+
     /**
-     *
-     * Cette fonction éclaircir/noircir l'image au complet
-     *
-     * @param pourcentage est la valeur selon laquel on veut éclaircir/noircir l'image, 100 = valeur initiale
+     * Cette fonction éclaircit ou noircit l'image au complet
+     * @param pourcentage est la valeur selon laquelle on veut éclaircir ou noircir l'image, 100 est la valeur initiale
      */
     public void eclaircirNoircir(int pourcentage){
         for(int x = 0; x < getDimX(); x++)

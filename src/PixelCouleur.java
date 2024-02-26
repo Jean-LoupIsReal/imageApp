@@ -1,19 +1,18 @@
 /**
- *
- * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
- * @version 1.0
- *
- * Cette classe est la classe fille de Pixel et elle implémente les pixels de couleur
+ * Cette classe PixelCouleurs implemente l'interface Pixel
+ * @auteur Arthur Andrianjafisolo
+ * @autor Audy Altis
+ * @author Jean-Loup Dandurand-Pominville
  */
 import java.io.*;
+
 public class PixelCouleur implements Pixel {
     private RGB couleur;
     int teinte;
+
     /**
-     *Cette méthode est appelée lors de la création d'un nouvel object Image
-     * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
-     * @version 1.0
-     * @param couleur
+     * Cette methode est un constructeur avec paramètre qui appel la classe RGB pour definir la couleur et mets la teinte a 255
+     * @param couleur provient de la classe RGB
      */
     public PixelCouleur(RGB couleur) {
         this.setCouleur(couleur);
@@ -33,29 +32,36 @@ public class PixelCouleur implements Pixel {
         this.couleur.setB((this.couleur.getB() * teinte) /255);
     }
 
+    /**
+     * Cette methode retourne la teinte du pixel
+     * @return la teinte du Pixel
+     */
     @Override
     public int getTeinte() {
         return 0;
     }
 
     /**
-     * Cette méthode attribut une valeur au pixel
+     * Cette methode attribut une valeur au pixel
      * @param couleur
      */
     public void setCouleur(RGB couleur) {
         this.couleur = couleur;
     }
+
     /**
-     * Cette méthode retourne la luminosite du pixel
+     * Cette methode retourne la couleur du pixel
      * @return value du Pixel
      */
     @Override
     public RGB getCouleur(){
         return this.couleur;
     }
-    public void ecrire(PrintStream out){
-        couleur.ecrire(out);
-     }
+
+    /**
+     * Permet d'afficher de manière claire
+     * @return les valeurs en string au lieu d'un objet
+     */
     public String toString(){
         return this.couleur.toString();
     }

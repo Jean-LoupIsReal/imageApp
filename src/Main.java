@@ -8,7 +8,5 @@ public class Main {
         File imgFile = new File(fileName + "." + format);
 
         test.lire(imgFile);
-
-
     }
 }
