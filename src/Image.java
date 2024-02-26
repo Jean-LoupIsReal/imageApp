@@ -38,6 +38,10 @@ public class Image {
         this.format = format;
     }
 
+    public Image() {
+        this(null,null,null,0,0);
+    }
+
     /**
      * @return nomFichier
      */
@@ -103,27 +107,57 @@ public class Image {
      * @param f doit etre un fichier dans lequel l'on va chercher l'information
      * Permet de lire l'information d'un fichier
      */
-    public void lire(File f) throws IOException {
-        //Récupère le fichier et le lit ligne par ligne
-        BufferedReader lecture = new BufferedReader(new FileReader(f));
-        String ligne = null;
-        int nbrLignes = 1;
+    public void lire(File f) throws FileNotFoundException {
+        //Récupère le fichier et le lit mot par mot
+        Scanner scanne = new Scanner(f);
 
         try {
-            while((ligne = lecture.readLine()) != null){  //Boucle while qui lit toutes les ligne
-                String[] dimension = ligne.split(" ");
-                if(nbrLignes == 1){                      //Prends les informations de la première ligne et l'affecte au format
-                    setFormat(ligne);
-                } else if (nbrLignes == 2) {            //Prend les dimensions des 2ème ligne et l'affecte à dimY et DimX
-                    setDimY(Integer.parseInt(dimension[0]));
-                    setDimX(Integer.parseInt(dimension[1]));
+            if(scanne.hasNextLine()) {
+                String premiereLigne = scanne.nextLine();
+                setFormat(premiereLigne);
+                System.out.println("Format : " + premiereLigne);
+                if (scanne.hasNextLine()) {
+                    int dimX = scanne.nextInt();
+                    int dimY = scanne.nextInt();
+                    setDimY(dimY);
+                    setDimX(dimX);
+                    System.out.println("Dimensions : " + dimX + " x " + dimY);
                 }
-                nbrLignes++;
+                if(scanne.hasNextLine()){
+                   scanne.nextInt();
+                }
+                while (scanne.hasNext()) {  //Boucle while qui lit toutes les lignes
+                    String valeur = scanne.next();
+                    creationMatrice(valeur);
+                }
+            } else {
+                System.out.println("Le fichier n'a pas pu être lu");
+                return ;
             }
-        } catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            lecture.close();
+        } finally {
+            scanne.close();
+        }
+    }
+
+    public void creationMatrice(String valeur){
+        matricePixel = new Pixel[dimY][dimX];
+        Scanner valeurScanner = new Scanner(valeur);
+
+        if(Objects.equals(getFormat(), "P2")){
+            for(int y = 0; y < getDimY(); y++){
+                for(int x = 0; x < getDimX(); x++){
+                    matricePixel[y][x] = new PixelNoirBlanc();
+                    if(valeurScanner.hasNextInt()){
+                        matricePixel[y][x].setTeinte(valeurScanner.nextInt());
+                    }
+                    System.out.print(matricePixel[y][x].getTeinte() + " ");
+                }
+                System.out.println();
+            }
+        } else if(Objects.equals(getFormat(), "P3")) {
+
+        } else {
+            System.out.println("La matrice n'a pas plus être rempli !");
         }
     }
 
