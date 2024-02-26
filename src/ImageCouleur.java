@@ -1,24 +1,29 @@
+/**
+ * Cette classe est la classe fille d'Image
+ * @auteur Arthur Andrianjafisolo
+ * @autor Audy Altis
+ * @author Jean-Loup Dandurand-Pominville
+ */
+
 import java.io.*;
 
-/**
- *
- * @author Audy Altis, Arthur Andrianjafisolo, jean-loup dandurand-pominville
- * @version 1.0
- *
- * Cette classe implemente une ImageCouleur
- */
 public class ImageCouleur extends Image{
 
     /**
-     * Cette méthode est appelée lors de la création d'un nouvel object ImageCouleur
-     *
+     * Cette methode est un constructeur avec parametre qui prend les valeurs de classe Image et qui est appelee lors de la création d'un nouvel object ImageCouleur
      * @param nomFichier
      * @param format
+     * @param matricePixel
+     * @param dimX
+     * @param dimY
      */
     public ImageCouleur(String nomFichier, String format, Pixel matricePixel[][], int dimX, int dimY) {
         super(nomFichier, format, matricePixel, dimX, dimY);;
     }
 
+    /**
+     * Constructeur sans parametre
+     */
     public ImageCouleur() {
         this(null,null, null,0,0);
     }
@@ -58,6 +63,12 @@ public class ImageCouleur extends Image{
         return nouvelleImg;
     }
 
+    /**
+     * Methode ecrire qui permet de cree une image de couleur
+     * @param f Contient un fichier dans lequel l'on va écrire la nouvelle image
+     * @param i Contient l'image que l'on desire ecrire dans le fichier f
+     * @throws FileNotFoundException dans le cas d'une erreur d'ecrire dans un fichier
+     */
     @Override
     public void ecrire(File f, Image i) throws FileNotFoundException {
         try {

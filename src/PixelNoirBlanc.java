@@ -1,28 +1,32 @@
 /**
- *
- * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
- * @version 1.0
- *
- * Cette classe est la classe fille de Pixel et elle implémente les pixels en noir et blanc
+ * Cette classe PixelCouleurs implemente l'interface Pixel
+ * @auteur Arthur Andrianjafisolo
+ * @autor Audy Altis
+ * @author Jean-Loup Dandurand-Pominville
  */
+
 import java.io.*;
+
 public class PixelNoirBlanc implements Pixel {
     protected int teinte;
 
     /**
-     *Cette méthode est appelée lors de la création d'un nouvel object Image
-     * @author Audy Altis, Arthur Andrianjafisolo, Jean-Loup Dandurand-Pominville
-     * @version 1.0
+     * Cette methode est un constructeur avec parametre qui permet de définir la teinte
      * @param teinte
      */
     public PixelNoirBlanc(int teinte){
         setTeinte(teinte);
     }
+
+    /**
+     * Cette methode est un constructeur sans parametre qyi defini la teinte a 255
+     */
     public PixelNoirBlanc(){
         setTeinte(255);
     }
+
     /**
-     * Cette méthode attribut une valeur au pixel
+     * Cette methode attribut une valeur au pixel
      * @param teinte
      */
     public void setTeinte(int teinte) {
@@ -33,20 +37,26 @@ public class PixelNoirBlanc implements Pixel {
             System.out.print("Teinte de PixelNoirBlanc a recu une valeur invalide");
         this.teinte = teinte;
     }
+
     /**
-     * Cette méthode retourne la luminosite du pixel
+     * Cette methode retourne la teinte du pixel
      * @return value du Pixel
      */
     public int getTeinte(){
         return this.teinte;
     }
+
     /**
-     * Cette méthode retourne la luminosite du pixel
+     * Cette méthode retourne la teinte du pixel
      * @return value du Pixel
      */
     public RGB getCouleur(){
         return new RGB(teinte,teinte,teinte);
     }
 
+    /**
+     * Permet d'afficher de manière claire
+     * @return les valeurs en string au lieu d'un objet
+     */
     public String toString(){return Integer.toString(teinte) +  " ";}
 }

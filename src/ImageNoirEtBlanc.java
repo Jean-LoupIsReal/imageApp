@@ -1,24 +1,28 @@
+/**
+ * Cette classe est la classe fille d'Image
+ * @auteur Arthur Andrianjafisolo
+ * @autor Audy Altis
+ * @author Jean-Loup Dandurand-Pominville
+ */
 import java.io.*;
 
-/**
- *
- * @author Audy Altis, Arthur Andrianjafisolo, jean-loup dandurand-pominville
- * @version 1.0
- *
- * Cette classe implemente une ImageNoirEtBlanc
- */
 public class ImageNoirEtBlanc  extends Image{
 
     /**
-     * Cette méthode est appelée lors de la création d'un nouvel object ImageNoirEtBlanc
-     *
+     * Cette methode est un constructeur avec parametre qui prend les valeurs de classe Image et qui est appelee lors de la création d'un nouvel object ImageNoirBlanc
      * @param nomFichier
      * @param format
+     * @param matricePixel
+     * @param dimX
+     * @param dimY
      */
     public ImageNoirEtBlanc(String nomFichier, String format, Pixel matricePixel[][], int dimX, int dimY) {
         super(nomFichier, format, matricePixel, dimX, dimY);
     }
 
+    /**
+     * Constructeur sans paramètre
+     */
     public ImageNoirEtBlanc() {
         this(null, null, null, 0,0);
     }
@@ -66,12 +70,10 @@ public class ImageNoirEtBlanc  extends Image{
         return nouvelleImg;
     }
     /**
-     *
-     * Cette fonctionne change suivant si l'image est en couleur ou en noir et blanc
-     *
-     * @param f doit etre un fichier dans lequel l'on va écrire l'image
-     * @param i doit etre une image que l'on desire écrire dans un fichier
-     * @throws FileNotFoundException dans le cas d'une erreur de d'écriture dans fichier
+     * Methode ecrire qui permet de cree une image en noir et blanc
+     * @param f Contient un fichier dans lequel l'on va écrire la nouvelle image
+     * @param i Contient l'image que l'on desire ecrire dans le fichier f
+     * @throws FileNotFoundException dans le cas d'une erreur d'ecrire dans un fichier
      */
     @Override
     public void ecrire(File f, Image i) throws FileNotFoundException {
