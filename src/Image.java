@@ -128,7 +128,7 @@ public class Image {
                     String valeur = scanne.next(); // Prend la valeur 255 et ne la compte pas dans la matrice
 
                     if(Objects.equals(getFormat(), "P2")) { // Crée une matrice à partir d'un fichier P2(PGM)
-                        affectMatriceP2(scanne);
+                        affecteMatriceP2(scanne);
                     } else if(Objects.equals(getFormat(), "P3")) { // Crée une matrice à partir d'un fichier P3(PPM)
                         for (int y = 0; y < getDimY(); y++) {
                             for (int x = 0; x < getDimX(); x++) {
@@ -155,7 +155,7 @@ public class Image {
         }
     }
 
-    public void affectMatriceP2(Scanner scanne){
+    public void affecteMatriceP2(Scanner scanne){
         for (int y = 0; y < getDimY(); y++) {
             for (int x = 0; x < getDimX(); x++) {
                 matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
@@ -201,25 +201,31 @@ public class Image {
      * @return le pixiel qui revient le plus souvent
      */
     public Image extraire(Image i, int p1, int c1, int p2, int c2){
-        //Déclare les nouvelle dimmentions de l'image
-        int nouvDimX = c2-c1;
-        int nouvDimY = p2-p1;
-        //Vérifie que les chiffres entrés soient bons
-        if(nouvDimY < 0 || nouvDimX < 0)
+        if(p1 < 0 || c1 < 0 || p2 > i.getDimX() || c2 > i.getDimY())
             //Erreur
-            System.out.print("nouvDim négatif dans extraire");
-        Pixel[][] matriceTemp= new Pixel[nouvDimY][nouvDimX];
-        //Entre les valeurs des pixels dans la matrice temporaire
-        for(int y = 0; y < nouvDimY; y++)
-        {
-            for(int x = 0; x < nouvDimX; x++)
+            System.out.println("out of bound, les dims sont x = " + i.getDimX() + " y = " + i.getDimY());
+        //Déclare les nouvelle dimmentions de l'image
+        else{
+            int nouvDimX = c2-c1;
+            int nouvDimY = p2-p1;
+            //Vérifie que les chiffres entrés soient bons
+            if(nouvDimY < 0 || nouvDimX < 0)
+                //Erreur
+                System.out.print("nouvDim négatif dans extraire");
+            Pixel[][] matriceTemp= new Pixel[nouvDimY][nouvDimX];
+            //Entre les valeurs des pixels dans la matrice temporaire
+            for(int y = 0; y < nouvDimY; y++)
             {
-                matriceTemp[y][x] = i.getMatricePixel()[p1 + y][c1 + x];
+                for(int x = 0; x < nouvDimX; x++)
+                {
+                    matriceTemp[y][x] = i.getMatricePixel()[p1 + y][c1 + x];
+                }
             }
+            //Entre les nouvelles informations dans un nouvel objet
+            Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
+            return imageTemp;
         }
-        //Entre les nouvelles informations dans un nouvel objet
-        Image imageTemp = new Image(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
-        return imageTemp;
+
     }
 
     /**
