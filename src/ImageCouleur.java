@@ -27,6 +27,14 @@ public class ImageCouleur extends Image{
     public ImageCouleur() {
         this(null,null, null,0,0);
     }
+    /**
+     * @param i Contient l'image de laquelle l'on desire extraire une partie
+     * @param p1 y du point 1
+     * @param c1 x du point 1
+     * @param p2 y du point 2
+     * @param c2 x du point 2
+     * @return Le pixel qui revient le plus souvent
+     */
     public ImageCouleur extraire(ImageCouleur i, int p1, int c1, int p2, int c2){
         //Déclare les nouvelle dimmentions de l'image
         int nouvDimX = c2-c1;
@@ -48,6 +56,10 @@ public class ImageCouleur extends Image{
         ImageCouleur imageTemp = new ImageCouleur(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
         return imageTemp;
     }
+    /**
+     * Cette fonction reduit la taille de l'image passe en parametre par 2 puis l'enregistre en nouvelle image
+     * @param i represente l'image d'origine
+     */
     public ImageCouleur reduire(Image i){
         int nouvDimX = i.getDimX()/2;
         int nouvDimY = i.getDimY()/2;
