@@ -67,6 +67,6 @@ public class Main {
 
         newImgBW.pivoter90(newImgBW);
         File fileTestPivot = new File("testPivot.pgm");
-        newImgBW.ecrire(fileTestPivot, newImgC);//Fonctionne
+        newImgBW.ecrire(fileTestPivot, newImgBW);//Fonctionne
     }
 }
