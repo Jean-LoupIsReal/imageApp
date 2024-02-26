@@ -15,25 +15,22 @@ public class Main {
         else
             System.out.println("sont !=");
 
-        System.out.println(test.couleur_predominante(test));
-
-
 //==================Test noir et blanc====================================
 
-        String fileName = "Sherbrooke_Frontenac_nuit";
+        String fileNameBW = "Sherbrooke_Frontenac_nuit";
         String formatBW = "pgm";
-        Image test = new Image();
-        File imgFileBW = new File(fileName + "." + formatBW);
+        Image testBW = new Image();
+        File imgFileBW = new File(fileNameBW + "." + formatBW);
 
-        File newImgFileBW = new File(fileName + "BW." + formatBW);
+        File newImgFileBW = new File(fileNameBW + "BW." + formatBW);
 
         ImageNoirEtBlanc newImgBW = new ImageNoirEtBlanc();
 
-        test.lire(imgFileBW);        //Fonctionne
+        testBW.lire(imgFileBW);        //Fonctionne
 
-        newImgBW.ecrire(newImgFileBW, test);        //Fonctionne
+        newImgBW.ecrire(newImgFileBW, testBW);        //Fonctionne
 
-        System.out.println("La couleur principale de l'image en noir et blanc est: " + test.couleur_predominante(test).toString());        //Fonctionne
+        System.out.println("La couleur principale de l'image en noir et blanc est: " + testBW.couleur_predominante(testBW).toString());        //Fonctionne
         //==================Test couleur====================================
         String formatC = "ppm";
         Image test2 = new Image();

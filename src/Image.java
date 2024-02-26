@@ -186,7 +186,7 @@ public class Image {
         Pixel[][] matriceTemp = new Pixel[i2.getDimY()][i2.getDimX()];
         for(int y = 0; y < i2.getDimY(); ++y){
             for(int x = 0; x < i2.getDimX(); ++x){
-                matriceTemp[y][x] = i2.getMatrixPixel()[y][x];
+                matriceTemp[y][x] = i2.getMatricePixel()[y][x];
             }
         }
         i1.setMatricePixel(matriceTemp);
