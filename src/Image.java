@@ -128,16 +128,7 @@ public class Image {
                     String valeur = scanne.next(); // Prend la valeur 255 et ne la compte pas dans la matrice
 
                     if(Objects.equals(getFormat(), "P2")) { // Crée une matrice à partir d'un fichier P2(PGM)
-                        for (int y = 0; y < getDimY(); y++) {
-                            for (int x = 0; x < getDimX(); x++) {
-                                matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
-                                if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
-                                    matricePixel[y][x].setTeinte(scanne.nextInt());
-                                }
-                                //System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
-                            }
-                             //System.out.println();                    //Saut de ligne
-                        }
+                        affectMatriceP2(scanne);
                     } else if(Objects.equals(getFormat(), "P3")) { // Crée une matrice à partir d'un fichier P3(PPM)
                         for (int y = 0; y < getDimY(); y++) {
                             for (int x = 0; x < getDimX(); x++) {
@@ -164,6 +155,19 @@ public class Image {
         }
     }
 
+    public void affectMatriceP2(Scanner scanne){
+        for (int y = 0; y < getDimY(); y++) {
+            for (int x = 0; x < getDimX(); x++) {
+                matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
+                if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
+                    matricePixel[y][x].setTeinte(scanne.nextInt());
+                }
+                //System.out.print(matricePixel[y][x]); //Pour voir ce qui était affecté
+            }
+            //System.out.println();                    //Saut de ligne
+        }
+    }
+
     /**
      * @param i doit etre une image que l'on desire écrire dans un fichier
      * @param f doit etre un fichier dans lequel l'on va écrire l'information
@@ -179,7 +183,13 @@ public class Image {
         i1.setDimY(i2.getDimY());
         i1.setFormat(i2.getFormat());
         i1.setNomFichier(i2.getNomFichier() + "(copie)");
-        i1.setMatricePixel(i2.getMatrixPixel());
+        Pixel[][] matriceTemp = new Pixel[i2.getDimY()][i2.getDimX()];
+        for(int y = 0; y < i2.getDimY(); ++y){
+            for(int x = 0; x < i2.getDimX(); ++x){
+                matriceTemp[y][x] = i2.getMatrixPixel()[y][x];
+            }
+        }
+        i1.setMatricePixel(matriceTemp);
     }
     
     /**
@@ -250,8 +260,8 @@ public class Image {
             {
                 for(int y = 0; y < i1.getDimY(); y++)
                 {
-                    identique = identique && i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte();
-                    identique = identique && i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur());
+                    identique = identique && (i1.getMatrixPixel()[y][x].getTeinte() == i2.getMatrixPixel()[y][x].getTeinte());
+                    identique = identique && (i1.getMatrixPixel()[y][x].getCouleur().compare(i2.getMatrixPixel()[y][x].getCouleur()));
                 }
             }
         }

@@ -53,9 +53,6 @@ public class PixelCouleur implements Pixel {
     public RGB getCouleur(){
         return this.couleur;
     }
-    public void ecrire(PrintStream out){
-        couleur.ecrire(out);
-     }
     public String toString(){
         return this.couleur.toString();
     }
