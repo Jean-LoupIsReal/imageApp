@@ -26,7 +26,14 @@ public class ImageNoirEtBlanc  extends Image{
     public ImageNoirEtBlanc() {
         this(null, null, null, 0,0);
     }
-
+    /**
+     * @param i Contient l'image de laquelle l'on desire extraire une partie
+     * @param p1 y du point 1
+     * @param c1 x du point 1
+     * @param p2 y du point 2
+     * @param c2 x du point 2
+     * @return Le pixel qui revient le plus souvent
+     */
     public ImageNoirEtBlanc extraire(ImageNoirEtBlanc i, int p1, int c1, int p2, int c2){
         //Déclare les nouvelle dimmentions de l'image
         int nouvDimX = c2-c1;
@@ -48,7 +55,32 @@ public class ImageNoirEtBlanc  extends Image{
         ImageNoirEtBlanc imageTemp = new ImageNoirEtBlanc(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
         return imageTemp;
     }
+
+    /**
+     *
+     * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
+     *
+     * @param i représente l'image d'origine
+     */
     public ImageNoirEtBlanc reduire(ImageNoirEtBlanc i){
+        int nouvDimX = i.getDimX()/2;
+        int nouvDimY = i.getDimY()/2;
+        Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];
+        for(int x = 0; x < nouvDimX; x++)
+        {
+            for(int y = 0; y < nouvDimY; y++)
+            {
+                matriceTemp[y][x] = i.getMatricePixel()[y][x];
+            }
+        }
+        ImageNoirEtBlanc nouvelleImg = new ImageNoirEtBlanc(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
+        return nouvelleImg;
+    }
+    /**
+     * Cette fonction reduit la taille de l'image passe en parametre par 2 puis l'enregistre en nouvelle image
+     * @param i represente l'image d'origine
+     */
+    public ImageNoirEtBlanc reduire(Image i){
         int nouvDimX = i.getDimX()/2;
         int nouvDimY = i.getDimY()/2;
         Pixel[][] matriceTemp = new Pixel[nouvDimY][nouvDimX];

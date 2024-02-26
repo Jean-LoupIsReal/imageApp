@@ -332,6 +332,7 @@ public class Image {
      */
     public void pivoter90(Image i){
         Pixel[][] matriceTemp = new Pixel[i.getDimX()][i.getDimY()];
+
         for(int x = 0; x < i.getDimX(); x++)
         {
             for(int y = 0; y < i.getDimY(); y++)
@@ -340,6 +341,9 @@ public class Image {
             }
         }
         i.setMatricePixel(matriceTemp);
+        int dimTemp = i.getDimY();
+        i.setDimY(getDimX());
+        i.setDimX(dimTemp);
     }
 
     /**
