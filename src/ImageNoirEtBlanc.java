@@ -44,6 +44,13 @@ public class ImageNoirEtBlanc  extends Image{
         ImageNoirEtBlanc imageTemp = new ImageNoirEtBlanc(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY );
         return imageTemp;
     }
+
+    /**
+     *
+     * Cette fonction réduit la taille de l'image passé en paramettre par 2 puis l'enregistre en nouvelle image
+     *
+     * @param i représente l'image d'origine
+     */
     public ImageNoirEtBlanc reduire(ImageNoirEtBlanc i){
         int nouvDimX = i.getDimX()/2;
         int nouvDimY = i.getDimY()/2;

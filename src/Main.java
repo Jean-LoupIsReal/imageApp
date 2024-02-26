@@ -49,12 +49,24 @@ public class Main {
         //==================================== Test extraire/reduire ===================================
 
         newImgBW.lire(newImgFileBW);
-        ImageNoirEtBlanc test3 = newImgBW.extraire(newImgBW,0 , 119, 192, 255);        //Fonctionne
-        File fileTest3 = new File("testExtraire.pgm");
-        test3.ecrire(fileTest3, test3);//Fonctionne
+        ImageNoirEtBlanc testExtraire = newImgBW.extraire(newImgBW,0 , 119, 192, 255);        //Fonctionne
+        File fileTestExtraire = new File("testExtraire.pgm");
+        testExtraire.ecrire(fileTestExtraire, testExtraire);//Fonctionne
 
         System.out.println("La couleur principale de l'image en noir et blanc est: " + test.couleur_predominante(test).toString());
         // Fonctionne
-        //ImageNoirEtBlanc testReduire = newImgBW.reduire(newImgC);
+        ImageNoirEtBlanc testReduire;
+        testReduire = newImgBW.reduire(newImgBW);
+        File fileTestReduire = new File("testReduire.pgm");
+        testReduire.ecrire(fileTestReduire, testReduire);//Fonctionne
+
+
+        newImgBW.eclaircirNoircir(50);
+        File fileTestEclaircirNoircir = new File("testEclaircirNoircir.pgm");
+        newImgBW.ecrire(fileTestEclaircirNoircir, newImgBW);//Fonctionne
+
+        newImgBW.pivoter90(newImgBW);
+        File fileTestPivot = new File("testPivot.pgm");
+        newImgBW.ecrire(fileTestPivot, newImgC);//Fonctionne
     }
 }
