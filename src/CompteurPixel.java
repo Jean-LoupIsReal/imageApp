@@ -1,8 +1,9 @@
 /**
  * Cette classe RGB qui permet de définir les 3 pixels necessaire pour avoir la couleur
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
 
 public class CompteurPixel {

@@ -1,8 +1,9 @@
 /**
  * Cette classe est la classe fille d'Image
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
 import java.io.*;
 
@@ -26,6 +27,7 @@ public class ImageNoirEtBlanc  extends Image{
     public ImageNoirEtBlanc() {
         this(null, null, null, 0,0);
     }
+
     /**
      * @param i Contient l'image de laquelle l'on desire extraire une partie
      * @param p1 y du point 1
@@ -76,6 +78,7 @@ public class ImageNoirEtBlanc  extends Image{
         ImageNoirEtBlanc nouvelleImg = new ImageNoirEtBlanc(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return nouvelleImg;
     }
+
     /**
      * Cette fonction reduit la taille de l'image passe en parametre par 2 puis l'enregistre en nouvelle image
      * @param i represente l'image d'origine
@@ -94,6 +97,7 @@ public class ImageNoirEtBlanc  extends Image{
         ImageNoirEtBlanc nouvelleImg = new ImageNoirEtBlanc(i.getNomFichier(), i.getFormat(), matriceTemp, nouvDimX, nouvDimY);
         return nouvelleImg;
     }
+
     /**
      * Methode ecrire qui permet de cree une image en noir et blanc
      * @param f Contient un fichier dans lequel l'on va écrire la nouvelle image

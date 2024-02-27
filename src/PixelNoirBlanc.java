@@ -1,11 +1,10 @@
 /**
  * Cette classe PixelCouleurs implemente l'interface Pixel
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
-
-import java.io.*;
 
 public class PixelNoirBlanc implements Pixel {
     protected int teinte;

@@ -146,11 +146,14 @@ public class Image {
         }
     }
 
-
+    /**
+     *  Cette méthode permet d'affecte une matrice P2 à l'aide du fichier lu dans lire()
+     * @param scanne
+     */
     public void affecteMatriceP2(Scanner scanne){
         for (int y = 0; y < getDimY(); y++) {
             for (int x = 0; x < getDimX(); x++) {
-                matricePixel[y][x] = new PixelNoirBlanc();  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
+                matricePixel[y][x] = new PixelNoirBlanc(scanne.nextInt());  // Nouvelle instance pour une matrice avec des Pixels noir et blanc
                 if (scanne.hasNextInt()) {                  //Si, c'est le prochain élément lu, on l'affecte dans la matrice
                     matricePixel[y][x].setTeinte(scanne.nextInt());
                 }
@@ -160,6 +163,10 @@ public class Image {
         }
     }
 
+    /**
+     * Cette méthode permet d'affecte une matrice P3 à l'aide du fichier lu dans lire()
+     * @param scanne
+     */
     public void affecteMatriceP3(Scanner scanne){
         for (int y = 0; y < getDimY(); y++) {
             for (int x = 0; x < getDimX(); x++) {
@@ -175,6 +182,7 @@ public class Image {
             //System.out.println();                    //Saut de ligne
         }
     }
+
     /**
      * Cette methode permet d'écrire une nouvelle image grace a la matrice
      * @param f Contient un fichier dans lequel l'on va écrire la nouvelle image
@@ -324,10 +332,9 @@ public class Image {
             }
             return liste.get(itPredominant).couleur;
     }
+
     /**
-     *
      * Cette fonction fait une rotation de 90 degrés sur l'image reçus en paramettre puis l'enregistre en nouvelle image
-     *
      * @param i représente l'image d'origine
      */
     public void pivoter90(Image i){

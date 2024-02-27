@@ -1,8 +1,9 @@
 /**
  * Cette classe est la classe fille d'Image
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
 
 import java.io.*;

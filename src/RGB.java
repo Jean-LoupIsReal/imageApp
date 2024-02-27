@@ -1,8 +1,9 @@
 /**
  * Cette classe RGB qui permet de définir les 3 pixels necessaire pour avoir la couleur
- * @auteur Arthur Andrianjafisolo
- * @autor Audy Altis
+ * @author Arthur Andrianjafisolo
+ * @author Audy Altis
  * @author Jean-Loup Dandurand-Pominville
+ * @version 1.0
  */
 
 public class RGB {
@@ -21,7 +22,6 @@ public class RGB {
         this.setG(g);
         this.setB(b);
     }
-
 
     /**
      * Cette methode retourne la couleur du pixel Rouge
